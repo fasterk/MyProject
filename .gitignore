@@ -1,0 +1,37 @@
+# ============================================
+# MDK-ARM 编译产物
+# ============================================
+MDK-ARM/*/
+​
+# MDK 用户个人配置文件
+MDK-ARM/*.uvguix.*
+MDK-ARM/*.uvoptx
+MDK-ARM/DebugConfig/
+MDK-ARM/RTE/
+​
+# ============================================
+# EIDE 自动生成/缓存目录
+# ============================================
+EIDE/.cmsis/
+EIDE/.vscode/
+EIDE/build/
+EIDE/.arts/log/
+​
+# ============================================
+# Drivers 中不必要的大型库
+# ============================================
+Drivers/CMSIS/DSP/DSP_Lib_TestSuite/
+Drivers/CMSIS/NN/
+Drivers/CMSIS/RTOS/
+Drivers/CMSIS/RTOS2/
+Drivers/CMSIS/docs/
+​
+# ============================================
+# 系统/编辑器垃圾文件
+# ============================================
+Thumbs.db
+.DS_Store
+*.suo
+————————————————
+版权声明：本文为CSDN博主「嵌入式盖饭」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/OhhOhhO/article/details/158889841
