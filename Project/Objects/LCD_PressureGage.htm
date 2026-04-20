@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD_PressureGage.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD_PressureGage.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Apr 17 10:33:15 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Apr 20 13:31:17 2026
 <BR><P>
 <H3>Maximum Stack Usage =        248 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -514,9 +514,11 @@ Global Symbols
 <LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut2ValleyValueFuntion
 <LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut2ThresholdValueFuntion
 <LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut2PeakValueFuntion
+<LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut2LagValFuntion
 <LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1ValleyValueFuntion
 <LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1ThresholdValueFuntion
 <LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1PeakValueFuntion
+<LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1LagValFuntion
 </UL>
 
 <P><STRONG><a name="[1c9]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
@@ -849,7 +851,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cd]"></a>APPDataEmpty</STRONG> (Thumb, 442 bytes, Stack size 16 bytes, flash_config.o(i.APPDataEmpty))
+<P><STRONG><a name="[cd]"></a>APPDataEmpty</STRONG> (Thumb, 440 bytes, Stack size 16 bytes, flash_config.o(i.APPDataEmpty))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = APPDataEmpty
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -874,7 +876,6 @@ Global Symbols
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetFontColourOrangeFuntion
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetFontColourGreenFuntion
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetFontColourBlueFuntion
-<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetFactoryResetFuntion
 <LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetZeroResetFuntion
 <LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetUnitMpaFuntion
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetUnitKpaFuntion
@@ -913,7 +914,7 @@ Global Symbols
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_20mAFuntion
 </UL>
 
-<P><STRONG><a name="[d5]"></a>AppDataInit</STRONG> (Thumb, 450 bytes, Stack size 16 bytes, flash_config.o(i.AppDataInit))
+<P><STRONG><a name="[d5]"></a>AppDataInit</STRONG> (Thumb, 538 bytes, Stack size 16 bytes, flash_config.o(i.AppDataInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = AppDataInit &rArr; APPDataFlashWrite &rArr; FlashPageErase &rArr; HAL_FLASH_Program &rArr; FLASH_Program_Page
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -1039,7 +1040,7 @@ Global Symbols
 <LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetRange10Funtion
 </UL>
 
-<P><STRONG><a name="[e0]"></a>App_Register</STRONG> (Thumb, 666 bytes, Stack size 32 bytes, app_modreg.o(i.App_Register))
+<P><STRONG><a name="[e0]"></a>App_Register</STRONG> (Thumb, 916 bytes, Stack size 32 bytes, app_modreg.o(i.App_Register))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = App_Register &rArr; Set_PressureCal
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_INT_Value
@@ -2209,11 +2210,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[7]"></a>ParamSetMenuFuntion</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, meterinterface.o(i.ParamSetMenuFuntion))
-<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = ParamSetMenuFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
-</UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-</UL>
+<P><STRONG><a name="[7]"></a>ParamSetMenuFuntion</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, meterinterface.o(i.ParamSetMenuFuntion))
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
 <P><STRONG><a name="[1f]"></a>ParamSetOut1DelayTimeFuntion</STRONG> (Thumb, 978 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1DelayTimeFuntion))
@@ -2242,7 +2239,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[1e]"></a>ParamSetOut1LagValFuntion</STRONG> (Thumb, 926 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1LagValFuntion))
+<P><STRONG><a name="[1e]"></a>ParamSetOut1LagValFuntion</STRONG> (Thumb, 1162 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1LagValFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut1LagValFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
@@ -2258,6 +2255,7 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2424,7 +2422,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[25]"></a>ParamSetOut2LagValFuntion</STRONG> (Thumb, 926 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2LagValFuntion))
+<P><STRONG><a name="[25]"></a>ParamSetOut2LagValFuntion</STRONG> (Thumb, 1162 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2LagValFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut2LagValFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
@@ -2440,6 +2438,7 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2580,7 +2579,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[19]"></a>ParamSetRange10Funtion</STRONG> (Thumb, 134 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetRange10Funtion))
+<P><STRONG><a name="[19]"></a>ParamSetRange10Funtion</STRONG> (Thumb, 262 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetRange10Funtion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = ParamSetRange10Funtion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
@@ -2943,7 +2942,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[38]"></a>SystemSetFactoryResetFuntion</STRONG> (Thumb, 1774 bytes, Stack size 24 bytes, meterinterface.o(i.SystemSetFactoryResetFuntion))
+<P><STRONG><a name="[38]"></a>SystemSetFactoryResetFuntion</STRONG> (Thumb, 1770 bytes, Stack size 24 bytes, meterinterface.o(i.SystemSetFactoryResetFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = SystemSetFactoryResetFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
@@ -2957,7 +2956,6 @@ Global Symbols
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChinese
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChar
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataEmpty
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
 </UL>
@@ -3204,7 +3202,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d7]"></a>System_ParameterReset</STRONG> (Thumb, 1412 bytes, Stack size 8 bytes, app_system.o(i.System_ParameterReset))
+<P><STRONG><a name="[d7]"></a>System_ParameterReset</STRONG> (Thumb, 1410 bytes, Stack size 8 bytes, app_system.o(i.System_ParameterReset))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = System_ParameterReset
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
@@ -3556,7 +3554,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_MainInterfaceTask
 </UL>
 
-<P><STRONG><a name="[83]"></a>ResultCalculateTask</STRONG> (Thumb, 260 bytes, Stack size 32 bytes, app_system.o(i.ResultCalculateTask))
+<P><STRONG><a name="[83]"></a>ResultCalculateTask</STRONG> (Thumb, 288 bytes, Stack size 32 bytes, app_system.o(i.ResultCalculateTask))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = ResultCalculateTask &rArr; __aeabi_ddiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_INT_Value
@@ -3634,7 +3632,6 @@ Local Symbols
 <LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1WayFuntion
 <LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1ModeFuntion
 <LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1Funtion
-<LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetMenuFuntion
 </UL>
 
 <P><STRONG><a name="[163]"></a>MenuExtraInformationDisplayTask</STRONG> (Thumb, 756 bytes, Stack size 24 bytes, meterinterface.o(i.MenuExtraInformationDisplayTask))

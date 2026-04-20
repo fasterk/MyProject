@@ -1457,13 +1457,7 @@ static TaskShareDataTypeDef _gTaskShareDatObj =
 //参数设置显示任务
 void ParamSetMenuFuntion(void *param)
 {
-	MenuCatalogMessagePrint((struct MenuItem *)param);
-	AppDataTypeDef *AppDataTemp;
-	AppDataTemp = (AppDataTypeDef *)(uint32_t *)(0x0801F000);
-	if((AppDataTemp->Head == 0xAA5555AA) && (AppDataTemp->End == 0x55AAAA55))
-	{
-		RangeSet_Flag = AppDataTemp->RangeSetFlag;
-	}
+	
 	if(RangeSet_Flag == 1)
 	{
 		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
@@ -2074,6 +2068,37 @@ void ParamSetRange10Funtion(void *param)
 		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
+		
+		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
+		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
+		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
+		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
+		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
+		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
+		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
+		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //通道1设置
@@ -2780,7 +2805,8 @@ void ParamSetOut1LagValFuntion(void *param)
 		KEY_ReadEvent(UP, Press_END, 1);
 		KEY_ReadEvent(DOWN, Press_END, 1);
 		
-#if ProductClass == LowPressureSeriesProduct
+if(Param_Config.ProductClass == LowPressureSeriesProduct)
+{
 		_gTaskShareDatObj.ParamSetObj.Mode = 1;
 		_gTaskShareDatObj.ParamSetObj.FontColour = MenuInterfaceColObj.ParamSetFontCol;
 		_gTaskShareDatObj.ParamSetObj.BackColour = MenuInterfaceColObj.ParamSetBackCol;
@@ -2795,8 +2821,11 @@ void ParamSetOut1LagValFuntion(void *param)
 		LCD_ShowString(97,25,(uint8_t *)"kPa",MenuInterfaceColObj.ParamSetFontCol,MenuInterfaceColObj.ParamSetFontCol,24,1);
 		ParamSetTaskStart(1);
 		ParamSetTaskCreate(&_gTaskShareDatObj.ParamSetObj);
-#elif ProductClass == HighPressureSeriesProduct
-		_gTaskShareDatObj.ParamSetObj.Mode = 1;
+}
+		
+if (Param_Config.ProductClass == HighPressureSeriesProduct)
+{
+	_gTaskShareDatObj.ParamSetObj.Mode = 1;
 		_gTaskShareDatObj.ParamSetObj.FontColour = MenuInterfaceColObj.ParamSetFontCol;
 		_gTaskShareDatObj.ParamSetObj.BackColour = MenuInterfaceColObj.ParamSetBackCol;
 		_gTaskShareDatObj.ParamSetObj.DecimalDisplayEnable = 0;
@@ -2804,14 +2833,14 @@ void ParamSetOut1LagValFuntion(void *param)
 		_gTaskShareDatObj.ParamSetObj.StartPos_Y = 25;
 		_gTaskShareDatObj.ParamSetObj.FontSize = 24;
 		_gTaskShareDatObj.ParamSetObj.ParamValue = AppDataRead(APP_Out1LagVal)/10;
-		_gTaskShareDatObj.ParamSetObj.ParamHighLimit = LagValUpperLimit/10;
-		_gTaskShareDatObj.ParamSetObj.ParamLowLimit = LagValLowerLimit/10;
+		_gTaskShareDatObj.ParamSetObj.ParamHighLimit = Param_Config.LagValUpperLimit/10;
+		_gTaskShareDatObj.ParamSetObj.ParamLowLimit = Param_Config.LagValLowerLimit/10;
 		_gTaskShareDatObj.ParamSetObj.ParamLen = 2;
 		LCD_ShowString(91,25,(uint8_t *)"kPa",MenuInterfaceColObj.ParamSetFontCol,MenuInterfaceColObj.ParamSetFontCol,24,1);
 		ParamSetTaskStart(1);
 		ParamSetTaskCreate(&_gTaskShareDatObj.ParamSetObj);
-#endif
-		
+}
+			
 		_gTaskShareDatObj.DataBuf[0] = 0;
 		sFunctionQuit = 1;
 		sFunctionExecute = 1;
@@ -2869,11 +2898,16 @@ void ParamSetOut1LagValFuntion(void *param)
 	if((_gTaskShareDatObj.State & 0x40) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
 	{
 		ParamSetTaskDelete();
-#if ProductClass == LowPressureSeriesProduct
-		AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out1LagVal);
-#elif ProductClass == HighPressureSeriesProduct
-		AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue * 10, APP_Out1LagVal);
-#endif
+if(Param_Config.ProductClass == LowPressureSeriesProduct)
+{
+	AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out1LagVal);
+}
+		
+if (Param_Config.ProductClass == HighPressureSeriesProduct)
+{
+	AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue * 10, APP_Out1LagVal);
+}
+		
 //		AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out1LagVal);
 		APPDataFlashWrite();
 		sAutoReturnLastMenu = 1;
@@ -3554,8 +3588,9 @@ void ParamSetOut2LagValFuntion(void *param)
 		KEY_ReadEvent(UP, Press_END, 1);
 		KEY_ReadEvent(DOWN, Press_END, 1);
 		
-#if ProductClass == LowPressureSeriesProduct
-		_gTaskShareDatObj.ParamSetObj.Mode = 1;
+if(Param_Config.ProductClass == LowPressureSeriesProduct)
+{
+	_gTaskShareDatObj.ParamSetObj.Mode = 1;
 		_gTaskShareDatObj.ParamSetObj.FontColour = MenuInterfaceColObj.ParamSetFontCol;
 		_gTaskShareDatObj.ParamSetObj.BackColour = MenuInterfaceColObj.ParamSetBackCol;
 		_gTaskShareDatObj.ParamSetObj.DecimalDisplayEnable = 1;
@@ -3569,7 +3604,10 @@ void ParamSetOut2LagValFuntion(void *param)
 		LCD_ShowString(97,25,(uint8_t *)"kPa",MenuInterfaceColObj.ParamSetFontCol,MenuInterfaceColObj.ParamSetFontCol,24,1);
 		ParamSetTaskStart(1);
 		ParamSetTaskCreate(&_gTaskShareDatObj.ParamSetObj);
-#elif ProductClass == HighPressureSeriesProduct
+}
+		
+if (Param_Config.ProductClass == HighPressureSeriesProduct)
+{
 		_gTaskShareDatObj.ParamSetObj.Mode = 1;
 		_gTaskShareDatObj.ParamSetObj.FontColour = MenuInterfaceColObj.ParamSetFontCol;
 		_gTaskShareDatObj.ParamSetObj.BackColour = MenuInterfaceColObj.ParamSetBackCol;
@@ -3578,14 +3616,14 @@ void ParamSetOut2LagValFuntion(void *param)
 		_gTaskShareDatObj.ParamSetObj.StartPos_Y = 25;
 		_gTaskShareDatObj.ParamSetObj.FontSize = 24;
 		_gTaskShareDatObj.ParamSetObj.ParamValue = AppDataRead(APP_Out2LagVal)/10;
-		_gTaskShareDatObj.ParamSetObj.ParamHighLimit = LagValUpperLimit/10;
-		_gTaskShareDatObj.ParamSetObj.ParamLowLimit = LagValLowerLimit/10;
+		_gTaskShareDatObj.ParamSetObj.ParamHighLimit = Param_Config.LagValUpperLimit/10;
+		_gTaskShareDatObj.ParamSetObj.ParamLowLimit = Param_Config.LagValLowerLimit/10;
 		_gTaskShareDatObj.ParamSetObj.ParamLen = 2;
 		LCD_ShowString(91,25,(uint8_t *)"kPa",MenuInterfaceColObj.ParamSetFontCol,MenuInterfaceColObj.ParamSetFontCol,24,1);
 		ParamSetTaskStart(1);
 		ParamSetTaskCreate(&_gTaskShareDatObj.ParamSetObj);
-#endif
-		
+}
+			
 		_gTaskShareDatObj.DataBuf[0] = 0;
 		sFunctionQuit = 1;
 		sFunctionExecute = 1;
@@ -3643,11 +3681,15 @@ void ParamSetOut2LagValFuntion(void *param)
 	if((_gTaskShareDatObj.State & 0x40) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
 	{
 		ParamSetTaskDelete();
-#if ProductClass == LowPressureSeriesProduct
-		AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out2LagVal);
-#elif ProductClass == HighPressureSeriesProduct
-		AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue * 10, APP_Out2LagVal);
-#endif
+if(Param_Config.ProductClass == LowPressureSeriesProduct)
+{
+	AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out2LagVal);
+}
+		
+if (Param_Config.ProductClass == HighPressureSeriesProduct)
+{
+	AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue * 10, APP_Out2LagVal);
+}
 		APPDataFlashWrite();
 		sAutoReturnLastMenu = 1;
 	}
@@ -4211,7 +4253,7 @@ void SystemSetFactoryResetFuntion(void *param)
 		#else
 		System_ParameterReset();
 		#endif
-		APPDataFlashWrite();
+//		APPDataFlashWrite();
 		//重新读取相关颜色数据
 		MenuInterfaceColObj.CatalogMiddleCol = AppDataRead(APP_SystemBackColour);
 		MenuInterfaceColObj.ItemCol = ABLUE;

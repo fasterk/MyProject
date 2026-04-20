@@ -5,7 +5,7 @@
 #include "APP_JM1203.h"
 #include "App_System.h"
 
-
+extern TypeParam_Config Param_Config;
 void App_Register(uint16_t Reg, uint16_t *v, uint8_t Flag) 
 {
 	static uint16_t TempH;
@@ -18,16 +18,20 @@ void App_Register(uint16_t Reg, uint16_t *v, uint8_t Flag)
 			if (Flag == R) 
 			{
 				//仅为正
-				#if AirPressureValueType == 1
+				if (Param_Config.AirPressureValueType == 1)
+				{
 					if(TempVal_S32 <= 0) *v = 0;
+				}		
 					else *v = FloatToUInt32(Get_Value()) >> 16;
 				//仅为负
-				#elif AirPressureValueType == 2
+				if (Param_Config.AirPressureValueType == 2)
+				{
 					if(TempVal_S32 >= 0) *v = 0;
 					else *v = FloatToUInt32(Get_Value()) >> 16;
-				#else
+				}				
+				else
 					*v = FloatToUInt32(Get_Value()) >> 16;
-				#endif
+				
 			}
 		}
 		else
@@ -35,16 +39,23 @@ void App_Register(uint16_t Reg, uint16_t *v, uint8_t Flag)
 			if (Flag == R) 
 			{
 				//仅为正
-				#if AirPressureValueType == 1
-					if(TempVal_S32 <= 0) *v = 0;
-					else *v = FloatToUInt32(Get_Value());
+				if(Param_Config.AirPressureValueType == 1)
+				{
+					if(TempVal_S32 <= 0) 
+						*v = 0;
+					else 
+						*v = FloatToUInt32(Get_Value());
+				}
+					
 				//仅为负
-				#elif AirPressureValueType == 2
+				if (Param_Config.AirPressureValueType == 2)
+				{
 					if(TempVal_S32 >= 0) *v = 0;
 					else *v = FloatToUInt32(Get_Value());
-				#else
+				}				
+				else
 					*v = FloatToUInt32(Get_Value());
-				#endif
+
 			}
 		}
 	}
@@ -55,16 +66,20 @@ void App_Register(uint16_t Reg, uint16_t *v, uint8_t Flag)
 			if (Flag == R) 
 			{
 				//仅为正
-				#if AirPressureValueType == 1
+				if( Param_Config.AirPressureValueType == 1)
+				{
 					if(TempVal_S32 <= 0) *v = 0;
 					else *v = Get_INT_Value() >> 16;
+				}
+					
 				//仅为负
-				#elif AirPressureValueType == 2
+				if (Param_Config.AirPressureValueType == 2)
+				{
 					if(TempVal_S32 >= 0) *v = 0;
 					else *v = Get_INT_Value() >> 16;
-				#else
+				}					
+				else
 					*v = Get_INT_Value() >> 16;
-				#endif
 			}
 		}
 		else
@@ -72,16 +87,20 @@ void App_Register(uint16_t Reg, uint16_t *v, uint8_t Flag)
 			if (Flag == R) 
 			{
 				//仅为正
-				#if AirPressureValueType == 1
+				if(Param_Config.AirPressureValueType == 1)
+				{
 					if(TempVal_S32 <= 0) *v = 0;
 					else *v = Get_INT_Value();
+				}
+					
 				//仅为负
-				#elif AirPressureValueType == 2
+				if (Param_Config.AirPressureValueType == 2)
+				{
 					if(TempVal_S32 >= 0) *v = 0;
 					else *v = Get_INT_Value();
-				#else
+				}				
+				else
 					*v = Get_INT_Value();
-				#endif
 			}
 		}
 	}

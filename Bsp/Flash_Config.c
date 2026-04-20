@@ -87,7 +87,31 @@ void AppDataInit(void)
 	if((AppDataTemp->Head == 0xAA5555AA) && (AppDataTemp->End == 0x55AAAA55))
 	{
 		Flash_Read_DATA(FlashDataBuffer, APP_DATA_Memory_ADDR, 256);
+		RangeSet_Flag = AppDataTemp->RangeSetFlag;
+		
+		Param_Config.ZeroingExtraScopeVal = AppDataTemp->ZeroingExtraScopeVal;
+		Param_Config.ProductClass = AppDataTemp->ProductClass;
+		Param_Config.AirPressureValueType = AppDataTemp->PressureValueType;
+			
+		Param_Config.PressureUpperLimit = AppDataTemp->OutPressureUpperLimit;
+		Param_Config.PressureLowerLimit = AppDataTemp->OutPressureLowerLimit;
+		Param_Config.LagValUpperLimit = AppDataTemp->OutLagValUpperLimit;
+		Param_Config.LagValLowerLimit =AppDataTemp->OutPressureLowerLimit;
+		Param_Config.DelayTimeUpperLimit = AppDataTemp->OutDelayTimeUpperLimit;
+		Param_Config.DelayTimeLowerLimit = AppDataTemp->OutDelayTimeLowerLimit;
+		Param_Config.ZeroingValUpperLimit = AppDataTemp->OutZeroingValUpperLimit;
+		Param_Config.ZeroingValLowerLimit = AppDataTemp->OutZeroingValLowerLimit;
+		Param_Config.ZeroingErrorRange = AppDataTemp->OutZeroingErrorRange;
+		
+		Param_Config.Default_LagVal = AppDataTemp->Out1LagVal;		
+		Param_Config.Default_Ch1_ThresholdVal = AppDataTemp->Out1ThresholdVal;
+		Param_Config.Default_Ch1_PeakValVal = AppDataTemp->Out1PeakVal;
+		Param_Config.Default_Ch1_ValleyVal = AppDataTemp->Out1ValleyVal;
+		Param_Config.Default_Ch2_ThresholdVal = AppDataTemp->Out2ThresholdVal;
+		Param_Config.Default_Ch2_PeakValVal = AppDataTemp->Out2PeakVal;
+		Param_Config.Default_Ch2_ValleyVal = AppDataTemp->Out2ValleyVal;	
 	}
+		
 	else
 	{
 		APPDataEmpty(1);

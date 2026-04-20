@@ -23,6 +23,10 @@
 	
 	int32_t RangeNum;				//量程编号by zengxing20260310
 	int32_t RangeSetFlag;				//量程编号by zengxing20260310
+	
+	int32_t ZeroingExtraScopeVal;
+	int32_t ProductClass;
+	int32_t PressureValueType;
 	int32_t OutPressureUpperLimit;
 	int32_t OutPressureLowerLimit;
 	int32_t OutLagValUpperLimit;
@@ -82,8 +86,13 @@ typedef enum
 	APP_AirZeroingVal,			//气压调零值
 	APP_SystemInputVoltage,		//外部输入电压
 	APP_SystemUnit,				//当前显示单位
+	
 	APP_SystemRange,			//当前量程byzengxing
 	APP_SetRangeFlag,			//当前量程byzengxing
+	
+	APP_ZeroingExtraScopeVal,
+	APP_ProductClass,
+	App_AirPressureValueType,
 	APP_OutPressureUpperLimit,
 	APP_OutPressureLowerLimit,
 	APP_OutLagValUpperLimit,
@@ -93,6 +102,7 @@ typedef enum
 	APP_OutZeroingValUpperLimit,
 	APP_OutZeroingValLowerLimit,
 	APP_OutZeroingErrorRange,
+	
 	APP_Out1Mode,				//通道1模式
 	APP_Out1ThresholdVal,		//通道1阈值
 	APP_Out1PeakVal,			//通道1峰值

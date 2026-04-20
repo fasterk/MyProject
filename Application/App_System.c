@@ -840,18 +840,23 @@ static void ResultCalculateTask(void *param)
 	TempVal_AirPressure = Get_INT_Value();
 	
 	//仅为正
-	#if AirPressureValueType == 1
+	if(Param_Config.AirPressureValueType == 1)
+	{
 		if(TempVal_AirPressure <= 0)
 		{
 			TempVal_AirPressure = 0;
 		}
+	}
+		
 	//仅为负
-	#elif AirPressureValueType == 2
-		if(TempVal_AirPressure >= 0)
-		{
-			TempVal_AirPressure = 0;
-		}
-	#endif
+if( Param_Config.AirPressureValueType == 2)
+{
+	if(TempVal_AirPressure >= 0)
+	{
+		TempVal_AirPressure = 0;
+	}
+}
+		
 	
 	LCD_DisTemp->vAirPressureOriginalVal = TempVal_AirPressure;
 	
