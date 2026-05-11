@@ -53,6 +53,7 @@ typedef struct
 	uint16_t vBacklightPwmVal;	//背光PWM值
 	int32_t vAirZeroingVal;		//气压调零值
 	int32_t vAirPressureVal;	//当前气压值(100Pa为基准)
+	int32_t vCurrentTemp;        //电流中间值  
 	int32_t vAirPressureOriginalVal;	//原始压力值(100Pa为基准)
 	uint32_t vADCxVal;			//当前ADC值
 	double vRefVoltageVal;		//当前外部参考电压值
@@ -925,11 +926,13 @@ if( Param_Config.AirPressureValueType == 2)
 	if(TempVal_AirPressure >= 0)
 	{
 		LCD_DisTemp->vAirPressureVal = TempVal_AirPressure;
+		LCD_DisTemp->vCurrentTemp = TempVal_AirPressure;
 		LCD_DisTemp->sDisFlag &= ~0x10;
 	}
 	else
 	{
 		LCD_DisTemp->vAirPressureVal = ~TempVal_AirPressure + 1;
+		LCD_DisTemp->vCurrentTemp = TempVal_AirPressure;
 		LCD_DisTemp->sDisFlag |= 0x10;
 	}
 	
@@ -979,7 +982,7 @@ static void LCD_MainInterfaceTask(void *param)
 //		{
 //			vCurrentCalculateBase
 //		}
-		CurrentVal = vCurrentCalculateRatio * (LCD_DisTemp->vAirPressureVal + vCurrentCalculateBase);
+		CurrentVal = vCurrentCalculateRatio * (LCD_DisTemp->vCurrentTemp + vCurrentCalculateBase);
 		CurrentVal += 4000;
 		
 		if(LCD_DisTemp->vDisUnit == SystemUnit_Mpa) 

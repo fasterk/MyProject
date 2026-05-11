@@ -19,11 +19,13 @@
 #define MenuItemHanziFontSize (24)	//菜单条目汉字字体大小
 //#define Menu_ItemDisplay_Max (2)	//每个菜单当前最大显示条目
 
-#define MenuTaskIdleExitTick (12000)	//菜单任务空闲退出Tick
+#define MenuTaskIdleExitTick (10000)	//菜单任务空闲退出Tick
 #define FunctionSetParamDisTick (1000)	//回调函数设置参数结果显示Tick
 
 extern TypeParam_Config Param_Config;
 extern uint32_t RangeSet_Flag;
+
+uint8_t Long_Press_OnceCount = 0;
 
 typedef struct
 {
@@ -251,16 +253,6 @@ struct MenuItem MainMenu[3] =
 /**********************参数设置菜单**********************/
 struct MenuItem ParamSetMenu[] =
 {
-	//量程设置(Range Set 10)
-	{
-		7,
-		1,
-		ParamSetRangeFuntion,
-		ParamSetRange,
-		MainMenu,
-		{{43,0,MenuItemHanziFontSize,(uint8_t *)"\x80\x81\x82\x83",{118,119,6,7,0,0,0,0}},
-		 {51,16,0,(uint8_t *)"Range Set",{0,0,0,0,0,0,0,0}}}
-	},
 	//通道1设置(OUT1 Set 8)
 	{
 		7,
@@ -280,6 +272,16 @@ struct MenuItem ParamSetMenu[] =
 		MainMenu,
 		{{43,24,MenuItemHanziFontSize,(uint8_t *)"OUT2\x80\x81",{6,7,0,0,0,0,0,0}},
 		 {59,16,0,(uint8_t *)"OUT2 Set",{0,0,0,0,0,0,0,0}}}
+	},
+	//量程设置(Range Set 10)
+	{
+		7,
+		1,
+		ParamSetRangeFuntion,
+		ParamSetRange,
+		MainMenu,
+		{{43,0,MenuItemHanziFontSize,(uint8_t *)"\x80\x81\x82\x83",{118,119,6,7,0,0,0,0}},
+		 {51,16,0,(uint8_t *)"Range Set",{0,0,0,0,0,0,0,0}}}
 	},
 	//单位设置(Unit Setting 12)
 	{
@@ -311,6 +313,7 @@ struct MenuItem ParamSetMenu[] =
 		{{43,0,MenuItemHanziFontSize,(uint8_t *)"\x80\x81\x82\x83",{104,105,53,106,0,0,0,0}},
 		 {51,16,0,(uint8_t *)"Zero Reset",{0,0,0,0,0,0,0,0}}}
 	},
+	
 	//退出(Exit)
 	{
 		7,
@@ -389,15 +392,15 @@ struct MenuItem ParamSetMenu2[] =
 //量程设置
 struct MenuItem ParamSetRange[] =
 {
-	//100~-100Kpa
+	//-100Kpa~100
 	{
 		11,
 		1,
 		ParamSetRange1Funtion,
 		NULL,
 		ParamSetMenu,
-		{{40,24,MenuItemHanziFontSize,(uint8_t *)"100~-100K",{0,0,0,0,0,0,0,0}},
-		 {28,16,0,(uint8_t *)"100~-100Kpa",{0,0,0,0,0,0,0,0}}}
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-100~100K",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-100~100Kpa",{0,0,0,0,0,0,0,0}}}
 	},
 	//0~250Kpa
 	{
@@ -416,8 +419,8 @@ struct MenuItem ParamSetRange[] =
 		ParamSetRange3Funtion,
 		NULL,
 		ParamSetMenu,
-		{{40,24,MenuItemHanziFontSize,(uint8_t *)"0~-100K",{0,0,0,0,0,0,0,0}},
-		 {28,16,0,(uint8_t *)"0~-100Kpa",{0,0,0,0,0,0,0,0}}}
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-100~0K",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-100~0Kpa",{0,0,0,0,0,0,0,0}}}
 	},
 	//0~1Mpa
 	{
@@ -456,8 +459,8 @@ struct MenuItem ParamSetRange[] =
 		ParamSetRange7Funtion,
 		NULL,
 		ParamSetMenu,
-		{{40,24,MenuItemHanziFontSize,(uint8_t *)"0~-101K",{0,0,0,0,0,0,0,0}},
-		 {28,16,0,(uint8_t *)"0~-101Kpa",{0,0,0,0,0,0,0,0}}}
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-101~0K",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-101~0Kpa",{0,0,0,0,0,0,0,0}}}
 	},
 	//-50~500Kpa
 	{
@@ -486,8 +489,8 @@ struct MenuItem ParamSetRange[] =
 		ParamSetRange10Funtion,
 		NULL,
 		ParamSetMenu,
-		{{40,24,MenuItemHanziFontSize,(uint8_t *)"101~-101K",{0,0,0,0,0,0,0,0}},
-		 {28,16,0,(uint8_t *)"101~-101Kpa",{0,0,0,0,0,0,0,0}}}
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-101~101K",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-101~101Kpa",{0,0,0,0,0,0,0,0}}}
 	},
 //退出(Exit)
 	{
@@ -1457,40 +1460,7 @@ static TaskShareDataTypeDef _gTaskShareDatObj =
 //参数设置显示任务
 void ParamSetMenuFuntion(void *param)
 {
-	
-	if(RangeSet_Flag == 1)
-	{
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
-	}
+	MenuCatalogMessagePrint((struct MenuItem *)param);
 }
 //系统设置功能函数
 void SystemSetMenuFuntion(void *param)
@@ -1512,22 +1482,15 @@ void QuitMenuFuntion(void *param)
 void ParamSetRangeFuntion(void *param)
 {
 	MenuCatalogMessagePrint((struct MenuItem *)param);
+
+	vManualItemNum = AppDataRead(APP_SystemRange);
 	
-	switch(AppDataRead(APP_SystemRange))
+	if(AppDataRead(APP_SetRangeFlag) == 1)
 	{
-		case 0: vManualItemNum = 0; break;
-		case 1: vManualItemNum = 1; break;
-		case 2: vManualItemNum = 2; break;
-		case 3: vManualItemNum = 3; break;
-		case 4: vManualItemNum = 4; break;
-		case 5: vManualItemNum = 5; break;
-		case 6: vManualItemNum = 6; break;
-		case 7: vManualItemNum = 7; break;
-		case 8: vManualItemNum = 8; break;
-		case 9: vManualItemNum = 9; break;
-		case 10: vManualItemNum = 10; break;
-		default: vManualItemNum = 0; break;
+		MeterInterfaceKeyShield(FunctionKey_Disbale);		
+		sFunctionExecute = 0;
 	}
+	
 }	
 
 //量程设置range1
@@ -1544,7 +1507,6 @@ void ParamSetRange1Funtion(void *param)
 		_gTaskShareDatObj.State |= 0x80;
 		_gTaskShareDatObj.TaskTick = GetSystemTick();
 	}
-	
 	if((_gTaskShareDatObj.State & 0x80) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
 	{
 		AppDataWrite(0, APP_SystemRange);
@@ -1555,43 +1517,15 @@ void ParamSetRange1Funtion(void *param)
 		
 		AppSetRange();			
 		sAutoReturnLastMenu = 1;
-		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
+
+	
+
 }
 //量程设置range2
 void ParamSetRange2Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1601,7 +1535,6 @@ void ParamSetRange2Funtion(void *param)
 		_gTaskShareDatObj.State |= 0x80;
 		_gTaskShareDatObj.TaskTick = GetSystemTick();
 	}
-	
 	if((_gTaskShareDatObj.State & 0x80) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
 	{
 		AppDataWrite(1, APP_SystemRange);
@@ -1613,42 +1546,13 @@ void ParamSetRange2Funtion(void *param)
 		AppSetRange();		
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
+	
 }
 //量程设置range3
 void ParamSetRange3Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1670,42 +1574,12 @@ void ParamSetRange3Funtion(void *param)
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range4
 void ParamSetRange4Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1725,44 +1599,14 @@ void ParamSetRange4Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppSetRange();
-		sAutoReturnLastMenu = 1;
+		sAutoReturnLastMenu = 1;	
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range5
 void ParamSetRange5Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1784,42 +1628,12 @@ void ParamSetRange5Funtion(void *param)
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range6
 void ParamSetRange6Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1841,42 +1655,12 @@ void ParamSetRange6Funtion(void *param)
 		AppSetRange();	
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range7
 void ParamSetRange7Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1898,42 +1682,12 @@ void ParamSetRange7Funtion(void *param)
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range8
 void ParamSetRange8Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -1955,42 +1709,12 @@ void ParamSetRange8Funtion(void *param)
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range9
 void ParamSetRange9Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -2012,42 +1736,12 @@ void ParamSetRange9Funtion(void *param)
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //量程设置range10
 void ParamSetRange10Funtion(void *param)
 {
-	if((_gTaskShareDatObj.State & 0x80) == 0x00)
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
 	{
 		sMenuFlag &= ~0x60;
 		ParamSetEndDisplayPage(1,1);
@@ -2068,37 +1762,6 @@ void ParamSetRange10Funtion(void *param)
 		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
-		
-		MainMenu[0].ChildrenMenu_t = ParamSetMenu2;
-		ParamSetOut1[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut1[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[5].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetOut2[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetUnit[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[0].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[1].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[2].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[3].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[4].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[5].ParentMenu_t = ParamSetMenu2;		
-		ParamSetRange[6].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[7].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[8].ParentMenu_t = ParamSetMenu2;
-		ParamSetRange[9].ParentMenu_t = ParamSetMenu2;
 	}
 }
 //通道1设置
@@ -4632,6 +4295,8 @@ void SystemSetVersionFuntion(void *param)
 		sFunctionQuit = 1;
 		sFunctionExecute = 1;
 		_gTaskShareDatObj.State |= 0x80;
+		
+		
 	}
 	
 	#if DEBUG == 1
@@ -4688,8 +4353,18 @@ void SystemSetVersionFuntion(void *param)
 	
 	if(KEY_ReadEvent(ENTER, Long_Press_Once, 1))
 	{
-		sAutoReturnLastMenu = 1;
-		KEY_ReadEvent(ENTER, Short_Press_Once, 1);
+		Long_Press_OnceCount++;
+		if(Long_Press_OnceCount == 3)
+		{
+			Long_Press_OnceCount = 0;
+			AppDataWrite(0, APP_SetRangeFlag);
+			APPDataFlashWrite();
+			AppDataWrite(0, APP_SystemRange);
+			APPDataFlashWrite();
+			AppSetRange();
+			sAutoReturnLastMenu = 1;
+			KEY_ReadEvent(ENTER, Short_Press_Once, 1);
+		}
 	}
 }
 

@@ -221,7 +221,7 @@ void APPDataEmpty(uint8_t resetFlag)
 	
 	if(resetFlag)
 	{
-		AppDataTemp->CurrentOutCalibrationVal_4MA = 3200;
+		AppDataTemp->CurrentOutCalibrationVal_4MA = 1100;
 		AppDataTemp->CurrentOutCalibrationVal_Temp1 = 0;
 		AppDataTemp->CurrentOutCalibrationVal_20MA = 5600;
 		
@@ -263,10 +263,8 @@ void APPDataEmpty(uint8_t resetFlag)
 		FlashDataBuffer[APP_ParamVal6] = AppDataTemp->ParamValue[5];
 		FlashDataBuffer[APP_ParamVal7] = AppDataTemp->ParamValue[6];
 		FlashDataBuffer[APP_ParamVal8] = AppDataTemp->ParamValue[7];
-		FlashDataBuffer[APP_ParamVal9] = AppDataTemp->ParamValue[8];
-		FlashDataBuffer[APP_JM1203ParamVal1] = AppDataTemp->JM1203ParamValue[0];
-		FlashDataBuffer[APP_JM1203ParamVal2] = AppDataTemp->JM1203ParamValue[1];
-		FlashDataBuffer[APP_JM1203ParamVal3] = AppDataTemp->JM1203ParamValue[2];
+	
+	
 		FlashDataBuffer[APP_JM1203ParamVal4] = AppDataTemp->JM1203ParamValue[3];
 		FlashDataBuffer[APP_JM1203ParamVal5] = AppDataTemp->JM1203ParamValue[4];
 		FlashDataBuffer[APP_JM1203ParamVal6] = AppDataTemp->JM1203ParamValue[5];
