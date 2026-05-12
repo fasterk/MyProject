@@ -13,7 +13,7 @@
 #include "APP_ParamInput.h"
 #include "APP_Sensor.h"
 
-#define SoftwareVer	"V1.2.4"	//软件版本
+#define SoftwareVer	"V1.3.0"	//软件版本
 #define HardwareVer	"V1.1.0"	//硬件版本
 
 #define MenuItemHanziFontSize (24)	//菜单条目汉字字体大小
