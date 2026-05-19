@@ -13,7 +13,7 @@
 #include "APP_ParamInput.h"
 #include "APP_Sensor.h"
 
-#define SoftwareVer	"V1.3.0"	//软件版本
+#define SoftwareVer	"V1.3.3"	//软件版本
 #define HardwareVer	"V1.1.0"	//硬件版本
 
 #define MenuItemHanziFontSize (24)	//菜单条目汉字字体大小
@@ -449,8 +449,8 @@ struct MenuItem ParamSetRange[] =
 		ParamSetRange6Funtion,
 		NULL,
 		ParamSetMenu,
-		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-100K~1M",{0,0,0,0,0,0,0,0}},
-		 {28,16,0,(uint8_t *)"-100Kpa~1Mpa",{0,0,0,0,0,0,0,0}}}
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-0.1~1M",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-0.1~1Mpa",{0,0,0,0,0,0,0,0}}}
 	},
 	//0~-101Kpa
 	{
@@ -1489,6 +1489,7 @@ void ParamSetRangeFuntion(void *param)
 	{
 		MeterInterfaceKeyShield(FunctionKey_Disbale);		
 		sFunctionExecute = 0;
+		MenuItemDisMax = 1;
 	}
 	
 }	
@@ -3909,6 +3910,7 @@ void SystemSetFactoryResetFuntion(void *param)
 		_gTaskShareDatObj.TempVal_S16[0] = AppDataRead(APP_ADCxCompensationVal);
 		_gTaskShareDatObj.TempVal_U16[1] = AppDataRead(APP_SystemLanguage);
 		APPDataEmpty(0);
+		AppDataInit();
 		System_ParameterReset();
 		AppDataWrite(_gTaskShareDatObj.TempVal_U16[0], APP_SystemInputVoltage);
 		AppDataWrite(_gTaskShareDatObj.TempVal_S16[0], APP_ADCxCompensationVal);
@@ -4354,7 +4356,7 @@ void SystemSetVersionFuntion(void *param)
 	if(KEY_ReadEvent(ENTER, Long_Press_Once, 1))
 	{
 		Long_Press_OnceCount++;
-		if(Long_Press_OnceCount == 3)
+		if(Long_Press_OnceCount == 2)
 		{
 			Long_Press_OnceCount = 0;
 			AppDataWrite(0, APP_SetRangeFlag);

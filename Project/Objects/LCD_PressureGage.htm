@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD_PressureGage.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD_PressureGage.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Tue May 12 08:37:23 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Tue May 19 13:47:26 2026
 <BR><P>
 <H3>Maximum Stack Usage =        248 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -469,11 +469,11 @@ Global Symbols
 <LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;JM1203_Init
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APP_SystemClockConfig
-<LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InitAll
 <LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_MspInit
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataEmpty
+<LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InitAll
 </UL>
 
 <P><STRONG><a name="[1c6]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -490,11 +490,11 @@ Global Symbols
 <LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;My_IntegerSplit
 <LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowIntNum
 <LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
-<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_ConfigChannel
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADCEx_Calibration_Start
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Enable
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_GetPeriphCLKFreq
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
@@ -504,9 +504,7 @@ Global Symbols
 <P><STRONG><a name="[10c]"></a>__aeabi_idivmod</STRONG> (Thumb, 326 bytes, Stack size 8 bytes, aeabi_sdiv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_idivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
-<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuExtraInformationDisplayTask
-<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTask
+<BR>[Called By]<UL><LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTask
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ExternalReferenceVolGetTask
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageParamDisplayTask
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChinese
@@ -519,6 +517,8 @@ Global Symbols
 <LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1ThresholdValueFuntion
 <LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1PeakValueFuntion
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetOut1LagValFuntion
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
+<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuExtraInformationDisplayTask
 </UL>
 
 <P><STRONG><a name="[1c9]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
@@ -712,13 +712,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b6]"></a>__fpl_cmpreturn</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, cmpret.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_return_NaN
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_InfNaN
+<BR><BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_InfNaN
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_return_NaN
 </UL>
 
 <P><STRONG><a name="[b5]"></a>__fpl_dcmp_InfNaN</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, dcmpin.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcheck_NaN2
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_cmpreturn
+<BR><BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_cmpreturn
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcheck_NaN2
 </UL>
 <BR>[Called By]<UL><LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drcmple
 <LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
@@ -738,8 +738,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = exit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_call_atexit_fns (Weak Reference)
+<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_call_atexit_fns (Weak Reference)
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -920,6 +920,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_ParameterReset
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataEmpty
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Read_DATA
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_UART_PARA
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Para
@@ -928,10 +930,9 @@ Global Symbols
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Extreme_Value
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_CalibAD
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_JM1203_Set
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataEmpty
 </UL>
 <BR>[Called By]<UL><LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_DeviceInit
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetFactoryResetFuntion
 </UL>
 
 <P><STRONG><a name="[c1]"></a>AppDataRead</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, flash_config.o(i.AppDataRead))
@@ -1036,8 +1037,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = AppSetRange &rArr; APPDataFlashWrite &rArr; FlashPageErase &rArr; HAL_FLASH_Program &rArr; FLASH_Program_Page
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_ParameterReset
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Read_DATA
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Read_DATA
 </UL>
 <BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetVersionFuntion
 <LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetRange9Funtion
@@ -1095,6 +1096,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_UART_PARA
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_PressureCal
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Para
@@ -1102,7 +1104,6 @@ Global Symbols
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_CalibAD
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FloatToUInt32
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_JM1203_Set
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 </UL>
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1438,10 +1439,10 @@ Global Symbols
 <P><STRONG><a name="[112]"></a>HAL_FLASH_Erase</STRONG> (Thumb, 564 bytes, Stack size 24 bytes, py32f072_hal_flash.o(i.HAL_FLASH_Erase))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HAL_FLASH_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_SectorErase
+<BR>[Calls]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_SectorErase
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_PageErase
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_MassErase
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlashPageErase
 </UL>
@@ -1453,8 +1454,8 @@ Global Symbols
 <P><STRONG><a name="[113]"></a>HAL_FLASH_Program</STRONG> (Thumb, 416 bytes, Stack size 24 bytes, py32f072_hal_flash.o(i.HAL_FLASH_Program))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = HAL_FLASH_Program &rArr; FLASH_Program_Page
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
-<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Program_Page
+<BR>[Calls]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Program_Page
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlashPageErase
 </UL>
@@ -1495,8 +1496,8 @@ Global Symbols
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADCEx_Calibration_Start
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Enable
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ConversionStop
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ConversionStop_Disable
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 </UL>
 
 <P><STRONG><a name="[11f]"></a>HAL_IWDG_Init</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, py32f072_hal_iwdg.o(i.HAL_IWDG_Init))
@@ -1512,19 +1513,19 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[120]"></a>HAL_Init</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, py32f072_hal.o(i.HAL_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_SYSTICK_Config &rArr; __NVIC_SetPriority
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
+<BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[121]"></a>HAL_InitTick</STRONG> (Thumb, 82 bytes, Stack size 24 bytes, py32f072_hal.o(i.HAL_InitTick))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_InitTick &rArr; HAL_SYSTICK_Config &rArr; __NVIC_SetPriority
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
@@ -1547,8 +1548,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 </UL>
-<BR>[Called By]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
+<BR>[Called By]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
 <P><STRONG><a name="[c4]"></a>HAL_OPA_DeInit</STRONG> (Thumb, 136 bytes, Stack size 16 bytes, py32f072_hal_opa.o(i.HAL_OPA_DeInit))
@@ -1600,8 +1601,8 @@ Global Symbols
 <P><STRONG><a name="[d3]"></a>HAL_RCC_ClockConfig</STRONG> (Thumb, 442 bytes, Stack size 16 bytes, py32f072_hal_rcc.o(i.HAL_RCC_ClockConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APP_SystemClockConfig
@@ -1633,8 +1634,8 @@ Global Symbols
 <P><STRONG><a name="[d2]"></a>HAL_RCC_OscConfig</STRONG> (Thumb, 1566 bytes, Stack size 48 bytes, py32f072_hal_rcc.o(i.HAL_RCC_OscConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = HAL_RCC_OscConfig &rArr; HAL_RCC_GetSysClockFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetHSIFreq
 </UL>
@@ -1669,12 +1670,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[f2]"></a>HAL_TIM_PWM_ConfigChannel</STRONG> (Thumb, 274 bytes, Stack size 16 bytes, py32f072_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_TIM_PWM_ConfigChannel &rArr; TIM_OC4_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_TIM_PWM_ConfigChannel &rArr; TIM_OC2_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4_SetConfig
+<BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
+<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4_SetConfig
 <LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3_SetConfig
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1_SetConfig
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentOutput_Init
 </UL>
@@ -1878,9 +1879,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawPoint
 </UL>
-<BR>[Called By]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceInit
+<BR>[Called By]<UL><LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceInit
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawRectangle
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 
 <P><STRONG><a name="[ff]"></a>LCD_DrawRectangle</STRONG> (Thumb, 72 bytes, Stack size 40 bytes, lcd.o(i.LCD_DrawRectangle))
@@ -1899,10 +1900,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WR_DATA16
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Address_Set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
-<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuExtraInformationDisplayTask
-<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTask
+<BR>[Called By]<UL><LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTask
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceInit
 <LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageRefreshScan
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageParamDisplayTask
@@ -1923,6 +1921,9 @@ Global Symbols
 <LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetCompensationValFuntion
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_4mAFuntion
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_20mAFuntion
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
+<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuExtraInformationDisplayTask
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 
 <P><STRONG><a name="[155]"></a>LCD_Init</STRONG> (Thumb, 728 bytes, Stack size 32 bytes, lcd.o(i.LCD_Init))
@@ -1945,9 +1946,7 @@ Global Symbols
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Address_Set
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
-<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetInterfaceTask
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetInterfaceTask
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageParamDisplayTask
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_MainInterfaceTask
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
@@ -1955,6 +1954,8 @@ Global Symbols
 <LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetVersionFuntion
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetFactoryResetFuntion
 <LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetCompensationValFuntion
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 
 <P><STRONG><a name="[fd]"></a>LCD_ShowChinese</STRONG> (Thumb, 264 bytes, Stack size 56 bytes, lcd.o(i.LCD_ShowChinese))
@@ -1965,11 +1966,7 @@ Global Symbols
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Address_Set
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
-<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
-<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetInterfaceTask
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetInterfaceTask
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceInit
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageParamDisplayTask
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_MainInterfaceTask
@@ -1989,6 +1986,10 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_4mAFuntion
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_20mAFuntion
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
+<LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
+<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
 </UL>
 
 <P><STRONG><a name="[104]"></a>LCD_ShowIntNum</STRONG> (Thumb, 160 bytes, Stack size 64 bytes, lcd.o(i.LCD_ShowIntNum))
@@ -2009,10 +2010,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
-<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetInterfaceTask
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetInterfaceTask
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceInit
 <LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageRefreshScan
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainPageParamDisplayTask
@@ -2032,17 +2030,20 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_4mAFuntion
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentsCalibration_20mAFuntion
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
+<LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
+<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
 </UL>
 
 <P><STRONG><a name="[16c]"></a>LED_Ctrl</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, gpio_config.o(i.LED_Ctrl))
-<BR><BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
-<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
-<LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTaskQuit
+<BR><BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTaskQuit
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutputTestFuntion
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput2TestOpenFuntion
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput2TestCloseFuntion
 <LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput1TestOpenFuntion
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput1TestCloseFuntion
+<LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
+<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
 </UL>
 
 <P><STRONG><a name="[166]"></a>MeterInterfaceInit</STRONG> (Thumb, 410 bytes, Stack size 16 bytes, meterinterface.o(i.MeterInterfaceInit))
@@ -2118,14 +2119,14 @@ Global Symbols
 <P><STRONG><a name="[167]"></a>MeterInterfaceTask</STRONG> (Thumb, 1108 bytes, Stack size 16 bytes, meterinterface.o(i.MeterInterfaceTask))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = MeterInterfaceTask &rArr; MeterInterfaceInit &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskReady
-<LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskIdleQuery
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceInit
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_ReadEvent
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Menu_Display
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskReady
+<LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskIdleQuery
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
@@ -2133,12 +2134,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[16a]"></a>MeterInterfaceTaskQuit</STRONG> (Thumb, 156 bytes, Stack size 8 bytes, meterinterface.o(i.MeterInterfaceTaskQuit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = MeterInterfaceTaskQuit &rArr; ParamSetTaskDelete
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = MeterInterfaceTaskQuit &rArr; KEY_ReadEvent
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<BR>[Calls]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_ReadEvent
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
 <LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_ReadEvent
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemTask
@@ -2196,14 +2197,14 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_py32f072xx.o(RESET)
 </UL>
 <P><STRONG><a name="[16d]"></a>NpnOut_Ctrl</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, gpio_config.o(i.NpnOut_Ctrl))
-<BR><BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
-<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
-<LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTaskQuit
+<BR><BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTaskQuit
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutputTestFuntion
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput2TestOpenFuntion
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput2TestCloseFuntion
 <LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput1TestOpenFuntion
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemSetOutput1TestCloseFuntion
+<LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_2
+<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OutputChannelCtrl_1
 </UL>
 
 <P><STRONG><a name="[e]"></a>ParamSetCompensationValFuntion</STRONG> (Thumb, 1822 bytes, Stack size 48 bytes, meterinterface.o(i.ParamSetCompensationValFuntion))
@@ -2233,10 +2234,7 @@ Global Symbols
 <P><STRONG><a name="[1f]"></a>ParamSetOut1DelayTimeFuntion</STRONG> (Thumb, 978 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1DelayTimeFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut1DelayTimeFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2246,6 +2244,9 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2259,10 +2260,7 @@ Global Symbols
 <P><STRONG><a name="[1e]"></a>ParamSetOut1LagValFuntion</STRONG> (Thumb, 1162 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1LagValFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut1LagValFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2272,6 +2270,9 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2279,8 +2280,8 @@ Global Symbols
 <P><STRONG><a name="[1a]"></a>ParamSetOut1ModeFuntion</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetOut1ModeFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = ParamSetOut1ModeFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2320,12 +2321,7 @@ Global Symbols
 <P><STRONG><a name="[1c]"></a>ParamSetOut1PeakValueFuntion</STRONG> (Thumb, 920 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1PeakValueFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut1PeakValueFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
-<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2335,6 +2331,11 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2342,12 +2343,7 @@ Global Symbols
 <P><STRONG><a name="[1b]"></a>ParamSetOut1ThresholdValueFuntion</STRONG> (Thumb, 912 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1ThresholdValueFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut1ThresholdValueFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
-<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2357,6 +2353,11 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2364,12 +2365,7 @@ Global Symbols
 <P><STRONG><a name="[1d]"></a>ParamSetOut1ValleyValueFuntion</STRONG> (Thumb, 920 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut1ValleyValueFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut1ValleyValueFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
-<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2379,6 +2375,11 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2386,8 +2387,8 @@ Global Symbols
 <P><STRONG><a name="[20]"></a>ParamSetOut1WayFuntion</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetOut1WayFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = ParamSetOut1WayFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2416,10 +2417,7 @@ Global Symbols
 <P><STRONG><a name="[26]"></a>ParamSetOut2DelayTimeFuntion</STRONG> (Thumb, 978 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2DelayTimeFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut2DelayTimeFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2429,6 +2427,9 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2442,10 +2443,7 @@ Global Symbols
 <P><STRONG><a name="[25]"></a>ParamSetOut2LagValFuntion</STRONG> (Thumb, 1162 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2LagValFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut2LagValFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2455,6 +2453,9 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2462,8 +2463,8 @@ Global Symbols
 <P><STRONG><a name="[21]"></a>ParamSetOut2ModeFuntion</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetOut2ModeFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = ParamSetOut2ModeFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2503,12 +2504,7 @@ Global Symbols
 <P><STRONG><a name="[23]"></a>ParamSetOut2PeakValueFuntion</STRONG> (Thumb, 920 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2PeakValueFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut2PeakValueFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
-<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2518,6 +2514,11 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2525,12 +2526,7 @@ Global Symbols
 <P><STRONG><a name="[22]"></a>ParamSetOut2ThresholdValueFuntion</STRONG> (Thumb, 928 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2ThresholdValueFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut2ThresholdValueFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
-<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2540,6 +2536,11 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2547,12 +2548,7 @@ Global Symbols
 <P><STRONG><a name="[24]"></a>ParamSetOut2ValleyValueFuntion</STRONG> (Thumb, 920 bytes, Stack size 32 bytes, meterinterface.o(i.ParamSetOut2ValleyValueFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = ParamSetOut2ValleyValueFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
-<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
-<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
@@ -2562,6 +2558,11 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APPDataFlashWrite
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputUnitRead
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PressureParamIntputEnable
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskStart
+<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskDelete
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
@@ -2569,8 +2570,8 @@ Global Symbols
 <P><STRONG><a name="[27]"></a>ParamSetOut2WayFuntion</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetOut2WayFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = ParamSetOut2WayFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2725,12 +2726,12 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[c]"></a>ParamSetRangeFuntion</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetRangeFuntion))
+<P><STRONG><a name="[c]"></a>ParamSetRangeFuntion</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetRangeFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = ParamSetRangeFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2793,8 +2794,8 @@ Global Symbols
 <P><STRONG><a name="[d]"></a>ParamSetUnitFuntion</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, meterinterface.o(i.ParamSetUnitFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = ParamSetUnitFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -2968,7 +2969,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
-<P><STRONG><a name="[38]"></a>SystemSetFactoryResetFuntion</STRONG> (Thumb, 1770 bytes, Stack size 24 bytes, meterinterface.o(i.SystemSetFactoryResetFuntion))
+<P><STRONG><a name="[38]"></a>SystemSetFactoryResetFuntion</STRONG> (Thumb, 1774 bytes, Stack size 24 bytes, meterinterface.o(i.SystemSetFactoryResetFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = SystemSetFactoryResetFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
@@ -2976,6 +2977,7 @@ Global Symbols
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CurrentOutput_UpdateCalcData
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataWrite
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataInit
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_ParameterReset
 <LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_ReadEvent
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
@@ -3002,8 +3004,8 @@ Global Symbols
 <P><STRONG><a name="[37]"></a>SystemSetFontColourFuntion</STRONG> (Thumb, 130 bytes, Stack size 8 bytes, meterinterface.o(i.SystemSetFontColourFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = SystemSetFontColourFuntion &rArr; MenuCatalogMessagePrint &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppDataRead
+<LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuCatalogMessagePrint
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -3113,22 +3115,22 @@ Global Symbols
 <P><STRONG><a name="[3f]"></a>SystemSetOutput1TestCloseFuntion</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, meterinterface.o(i.SystemSetOutput1TestCloseFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = SystemSetOutput1TestCloseFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
 <P><STRONG><a name="[3e]"></a>SystemSetOutput1TestOpenFuntion</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, meterinterface.o(i.SystemSetOutput1TestOpenFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = SystemSetOutput1TestOpenFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -3142,22 +3144,22 @@ Global Symbols
 <P><STRONG><a name="[41]"></a>SystemSetOutput2TestCloseFuntion</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, meterinterface.o(i.SystemSetOutput2TestCloseFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = SystemSetOutput2TestCloseFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
 <P><STRONG><a name="[40]"></a>SystemSetOutput2TestOpenFuntion</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, meterinterface.o(i.SystemSetOutput2TestOpenFuntion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = SystemSetOutput2TestOpenFuntion &rArr; ParamSetEndDisplayPage &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
+<BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceKeyShield
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSystemTick
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetEndDisplayPage
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> meterinterface.o(.data)
 </UL>
@@ -3263,8 +3265,8 @@ Global Symbols
 <P><STRONG><a name="[17e]"></a>TimerTaskCreate</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, timer_config.o(i.TimerTaskCreate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TimerTaskCreate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemTask
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemTask
+<LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParamSetTaskCreate
 </UL>
 
 <P><STRONG><a name="[17f]"></a>TimerTaskDelete</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, timer_config.o(i.TimerTaskDelete))
@@ -3619,20 +3621,20 @@ Local Symbols
 <P><STRONG><a name="[5]"></a>OutputChannelCtrl_1</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, app_externaloutput.o(i.OutputChannelCtrl_1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = OutputChannelCtrl_1 &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
+<BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChinese
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app_externaloutput.o(.data)
 </UL>
 <P><STRONG><a name="[6]"></a>OutputChannelCtrl_2</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, app_externaloutput.o(i.OutputChannelCtrl_2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = OutputChannelCtrl_2 &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
+<BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChinese
+<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NpnOut_Ctrl
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Ctrl
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app_externaloutput.o(.data)
 </UL>
@@ -3681,11 +3683,11 @@ Local Symbols
 <P><STRONG><a name="[164]"></a>Menu_Display</STRONG> (Thumb, 954 bytes, Stack size 56 bytes, meterinterface.o(i.Menu_Display))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = Menu_Display &rArr; LCD_ShowChinese &rArr; LCD_DrawPoint &rArr; LCD_Address_Set &rArr; LCD_WR_DATA16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuItemFrameEndCalcuate
-<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuExtraInformationDisplayTask
-<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChinese
+<BR>[Calls]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChinese
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowChar
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
+<LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuItemFrameEndCalcuate
+<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MenuExtraInformationDisplayTask
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeterInterfaceTask
@@ -3947,8 +3949,8 @@ Local Symbols
 <P><STRONG><a name="[125]"></a>__NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, py32f072_hal_cortex.o(i.__NVIC_SetPriority))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __NVIC_SetPriority
 </UL>
-<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
 </UL>
 
 <P><STRONG><a name="[11b]"></a>FLASH_MassErase</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, py32f072_hal_flash.o(i.FLASH_MassErase))
