@@ -25,5 +25,8 @@ void Set_Para(u8 i, u16 v);
 float Get_Value(void);
 int Get_INT_Value(void);
 
+u16 Get_CalibDotNum(void);
+void Set_CalibDotNum(u16 v);
+
 #endif
 

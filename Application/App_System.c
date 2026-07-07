@@ -891,7 +891,10 @@ if( Param_Config.AirPressureValueType == 2)
 			if(TempVal_AirPressure >= 0) TempVal_AirPressure = 0;
 		}
 	}
-	
+	if((TempVal_AirPressure <= (int32_t)(Param_Config.PressureUpperLimit * 0.03)) && (TempVal_AirPressure >= (int32_t)(Param_Config.PressureLowerLimit * 0.03)) )
+	{
+		TempVal_AirPressure = 0;
+	}
 	if(TempVal_AirPressure >= Param_Config.PressureUpperLimit) TempVal_AirPressure = Param_Config.PressureUpperLimit;
 	else if(TempVal_AirPressure <= Param_Config.PressureLowerLimit) TempVal_AirPressure = Param_Config.PressureLowerLimit;
 	

@@ -123,13 +123,38 @@ void AppDataInit(void)
 	Set_UART_PARA(0,AppDataRead(APP_DevID));
 	Set_UART_PARA(1,AppDataRead(APP_CommBaudRate));
 	//
-	Set_PressureCal(0, AppDataRead(APP_CurrentOutCalibrationVal_4MA));
-	Set_PressureCal(1, AppDataRead(APP_CurrentOutCalibrationVal_Temp1));
-	Set_PressureCal(2, AppDataRead(APP_CurrentOutCalibrationVal_20MA));
-	//
+	Set_CalibDotNum(AppDataRead(APP_CalibDotNumber));
 	Set_CalibAD(0, AppDataRead(APP_CalibADxVal1));
 	Set_CalibAD(1, AppDataRead(APP_CalibADxVal2));
 	Set_CalibAD(2, AppDataRead(APP_CalibADxVal3));
+	Set_CalibAD(3, AppDataRead(APP_CalibADxVal4));
+	Set_CalibAD(4, AppDataRead(APP_CalibADxVal5));
+	Set_CalibAD(5, AppDataRead(APP_CalibADxVal6));
+	Set_CalibAD(6, AppDataRead(APP_CalibADxVal7));
+	Set_CalibAD(7, AppDataRead(APP_CalibADxVal8));
+	Set_CalibAD(8, AppDataRead(APP_CalibADxVal9));
+	Set_CalibAD(9, AppDataRead(APP_CalibADxVal10));
+	Set_CalibAD(10, AppDataRead(APP_CalibADxVal11));
+	Set_CalibAD(11, AppDataRead(APP_CalibADxVal12));
+	Set_CalibAD(12, AppDataRead(APP_CalibADxVal13));
+	Set_CalibAD(13, AppDataRead(APP_CalibADxVal14));
+	Set_CalibAD(14, AppDataRead(APP_CalibADxVal15));
+	//
+	Set_Extreme_Value(0, UInt32ToFloat(AppDataRead(APP_ExtremeVal1)));
+	Set_Extreme_Value(1, UInt32ToFloat(AppDataRead(APP_ExtremeVal2)));
+	Set_Extreme_Value(2, UInt32ToFloat(AppDataRead(APP_ExtremeVal3)));
+	Set_Extreme_Value(3, UInt32ToFloat(AppDataRead(APP_ExtremeVal4)));
+	Set_Extreme_Value(4, UInt32ToFloat(AppDataRead(APP_ExtremeVal5)));
+	Set_Extreme_Value(5, UInt32ToFloat(AppDataRead(APP_ExtremeVal6)));
+	Set_Extreme_Value(6, UInt32ToFloat(AppDataRead(APP_ExtremeVal7)));
+	Set_Extreme_Value(7, UInt32ToFloat(AppDataRead(APP_ExtremeVal8)));
+	Set_Extreme_Value(8, UInt32ToFloat(AppDataRead(APP_ExtremeVal9)));
+	Set_Extreme_Value(9, UInt32ToFloat(AppDataRead(APP_ExtremeVal10)));
+	Set_Extreme_Value(10, UInt32ToFloat(AppDataRead(APP_ExtremeVal11)));
+	Set_Extreme_Value(11, UInt32ToFloat(AppDataRead(APP_ExtremeVal12)));
+	Set_Extreme_Value(12, UInt32ToFloat(AppDataRead(APP_ExtremeVal13)));
+	Set_Extreme_Value(13, UInt32ToFloat(AppDataRead(APP_ExtremeVal14)));
+	Set_Extreme_Value(14, UInt32ToFloat(AppDataRead(APP_ExtremeVal15)));
 	//
 	Set_Extreme_Value(0, UInt32ToFloat(AppDataRead(APP_ExtremeVal1)));
 	Set_Extreme_Value(1, UInt32ToFloat(AppDataRead(APP_ExtremeVal2)));
@@ -249,12 +274,38 @@ void APPDataEmpty(uint8_t resetFlag)
 		FlashDataBuffer[APP_CurrentOutCalibrationVal_Temp1] = AppDataTemp->CurrentOutCalibrationVal_Temp1;
 		FlashDataBuffer[APP_CurrentOutCalibrationVal_20MA] = AppDataTemp->CurrentOutCalibrationVal_20MA;
 		
+		FlashDataBuffer[APP_CalibDotNumber] = AppDataTemp->CalibDotNumber;
 		FlashDataBuffer[APP_CalibADxVal1] = AppDataTemp->CalibADxValue[0];
 		FlashDataBuffer[APP_CalibADxVal2] = AppDataTemp->CalibADxValue[1];
 		FlashDataBuffer[APP_CalibADxVal3] = AppDataTemp->CalibADxValue[2];
+		FlashDataBuffer[APP_CalibADxVal4] = AppDataTemp->CalibADxValue[3];
+		FlashDataBuffer[APP_CalibADxVal5] = AppDataTemp->CalibADxValue[4];
+		FlashDataBuffer[APP_CalibADxVal6] = AppDataTemp->CalibADxValue[5];
+		FlashDataBuffer[APP_CalibADxVal7] = AppDataTemp->CalibADxValue[6];
+		FlashDataBuffer[APP_CalibADxVal8] = AppDataTemp->CalibADxValue[7];
+		FlashDataBuffer[APP_CalibADxVal9] = AppDataTemp->CalibADxValue[8];
+		FlashDataBuffer[APP_CalibADxVal10] = AppDataTemp->CalibADxValue[9];
+		FlashDataBuffer[APP_CalibADxVal11] = AppDataTemp->CalibADxValue[10];
+		FlashDataBuffer[APP_CalibADxVal12] = AppDataTemp->CalibADxValue[11];
+		FlashDataBuffer[APP_CalibADxVal13] = AppDataTemp->CalibADxValue[12];
+		FlashDataBuffer[APP_CalibADxVal14] = AppDataTemp->CalibADxValue[13];
+		FlashDataBuffer[APP_CalibADxVal15] = AppDataTemp->CalibADxValue[14];
 		FlashDataBuffer[APP_ExtremeVal1] = AppDataTemp->ExtremeValue[0];
 		FlashDataBuffer[APP_ExtremeVal2] = AppDataTemp->ExtremeValue[1];
 		FlashDataBuffer[APP_ExtremeVal3] = AppDataTemp->ExtremeValue[2];
+		FlashDataBuffer[APP_ExtremeVal4] = AppDataTemp->ExtremeValue[3];
+		FlashDataBuffer[APP_ExtremeVal5] = AppDataTemp->ExtremeValue[4];
+		FlashDataBuffer[APP_ExtremeVal6] = AppDataTemp->ExtremeValue[5];
+		FlashDataBuffer[APP_ExtremeVal7] = AppDataTemp->ExtremeValue[6];
+		FlashDataBuffer[APP_ExtremeVal8] = AppDataTemp->ExtremeValue[7];
+		FlashDataBuffer[APP_ExtremeVal9] = AppDataTemp->ExtremeValue[8];
+		FlashDataBuffer[APP_ExtremeVal10] = AppDataTemp->ExtremeValue[9];
+		FlashDataBuffer[APP_ExtremeVal11] = AppDataTemp->ExtremeValue[10];
+		FlashDataBuffer[APP_ExtremeVal12] = AppDataTemp->ExtremeValue[11];
+		FlashDataBuffer[APP_ExtremeVal13] = AppDataTemp->ExtremeValue[12];
+		FlashDataBuffer[APP_ExtremeVal14] = AppDataTemp->ExtremeValue[13];
+		FlashDataBuffer[APP_ExtremeVal15] = AppDataTemp->ExtremeValue[14];
+		
 		FlashDataBuffer[APP_ParamVal1] = AppDataTemp->ParamValue[0];
 		FlashDataBuffer[APP_ParamVal2] = AppDataTemp->ParamValue[1];
 		FlashDataBuffer[APP_ParamVal3] = AppDataTemp->ParamValue[2];
@@ -299,13 +350,40 @@ void CalibDataWritePoll_Task(void)
 			AppDataWrite(Get_PressureCal(1), APP_CurrentOutCalibrationVal_Temp1);
 			AppDataWrite(Get_PressureCal(2), APP_CurrentOutCalibrationVal_20MA);
 			//
+			AppDataWrite(Get_CalibDotNum(), APP_CalibDotNumber);
+			
 			AppDataWrite(Get_CalibAD(0), APP_CalibADxVal1);
 			AppDataWrite(Get_CalibAD(1), APP_CalibADxVal2);
 			AppDataWrite(Get_CalibAD(2), APP_CalibADxVal3);
+			AppDataWrite(Get_CalibAD(3), APP_CalibADxVal4);
+			AppDataWrite(Get_CalibAD(4), APP_CalibADxVal5);
+			AppDataWrite(Get_CalibAD(5), APP_CalibADxVal6);
+			AppDataWrite(Get_CalibAD(6), APP_CalibADxVal7);
+			AppDataWrite(Get_CalibAD(7), APP_CalibADxVal8);
+			AppDataWrite(Get_CalibAD(8), APP_CalibADxVal9);
+			AppDataWrite(Get_CalibAD(9), APP_CalibADxVal10);
+			AppDataWrite(Get_CalibAD(10), APP_CalibADxVal11);
+			AppDataWrite(Get_CalibAD(11), APP_CalibADxVal12);
+			AppDataWrite(Get_CalibAD(12), APP_CalibADxVal13);
+			AppDataWrite(Get_CalibAD(13), APP_CalibADxVal14);
+			AppDataWrite(Get_CalibAD(14), APP_CalibADxVal15);
+			
 			//
 			AppDataWrite(FloatToUInt32(Get_Extreme_Value(0)), APP_ExtremeVal1);
 			AppDataWrite(FloatToUInt32(Get_Extreme_Value(1)), APP_ExtremeVal2);
 			AppDataWrite(FloatToUInt32(Get_Extreme_Value(2)), APP_ExtremeVal3);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(3)), APP_ExtremeVal4);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(4)), APP_ExtremeVal5);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(5)), APP_ExtremeVal6);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(6)), APP_ExtremeVal7);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(7)), APP_ExtremeVal8);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(8)), APP_ExtremeVal9);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(9)), APP_ExtremeVal10);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(10)), APP_ExtremeVal11);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(11)), APP_ExtremeVal12);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(12)), APP_ExtremeVal13);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(13)), APP_ExtremeVal14);
+			AppDataWrite(FloatToUInt32(Get_Extreme_Value(14)), APP_ExtremeVal15);
 			//
 			AppDataWrite(Get_Para(0), APP_ParamVal1);
 			AppDataWrite(Get_Para(1), APP_ParamVal2);

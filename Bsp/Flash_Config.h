@@ -65,8 +65,9 @@
 	int32_t CurrentOutCalibrationVal_Temp1;	//电流输出校准值备用1
 	int32_t CurrentOutCalibrationVal_20MA;	//电流输出校准值20ma
 	//久好相关数据
-	int32_t CalibADxValue[3];	    //标定ADC值
-	int32_t ExtremeValue[3];
+	int32_t CalibDotNumber;				//标定点数量
+	int32_t CalibADxValue[15];	    //标定ADC值
+	int32_t ExtremeValue[15];
 	int32_t ParamValue[9];
 	int32_t JM1203ParamValue[10];
 	
@@ -143,12 +144,38 @@ typedef enum
 	APP_CurrentOutCalibrationVal_Temp1,	//电流输出校准值备用1
 	APP_CurrentOutCalibrationVal_20MA,	//电流输出校准值20ma
 	//久好相关数据
+	APP_CalibDotNumber,				//标定点数量
 	APP_CalibADxVal1,
 	APP_CalibADxVal2,
 	APP_CalibADxVal3,
+	APP_CalibADxVal4,
+	APP_CalibADxVal5,
+	APP_CalibADxVal6,
+	APP_CalibADxVal7,
+	APP_CalibADxVal8,
+	APP_CalibADxVal9,
+	APP_CalibADxVal10,
+	APP_CalibADxVal11,
+	APP_CalibADxVal12,
+	APP_CalibADxVal13,
+	APP_CalibADxVal14,
+	APP_CalibADxVal15,
+
 	APP_ExtremeVal1,
 	APP_ExtremeVal2,
 	APP_ExtremeVal3,
+	APP_ExtremeVal4,
+	APP_ExtremeVal5,
+	APP_ExtremeVal6,
+	APP_ExtremeVal7,
+	APP_ExtremeVal8,
+	APP_ExtremeVal9,
+	APP_ExtremeVal10,
+	APP_ExtremeVal11,
+	APP_ExtremeVal12,
+	APP_ExtremeVal13,
+	APP_ExtremeVal14,
+	APP_ExtremeVal15,
 	APP_ParamVal1,
 	APP_ParamVal2,
 	APP_ParamVal3,

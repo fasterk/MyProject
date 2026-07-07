@@ -6,7 +6,7 @@
 #define CH_NUM 1 
 #define FILTER_COUNT 60
 
-#define Calib_Num 3
+#define Calib_Num 15
 static int	CalibAD[Calib_Num];
 static int	PressureCal[3];
 static float Extreme_Value[Calib_Num];
@@ -21,188 +21,372 @@ static u8 Init;
 
 static float Filter(u8 No, float Value, u16 Coff);	//滤波
 
+static u8 CalibDotNum = 0;
+
 #define Run_Num 1
 //static u8 Run[Run_Num];	
 //Run[0]	传感器状态1=故障
 
 float k, t;
 
-void Sensor_Task(void)
-{
-	float Temp, Filter_Temp;
-	u8 i;
-    int	CalibAD_TEMP[Calib_Num];	
-	int Raw_Data = Get_Bridge_RawData();
-	
-	/*----------处理负数----------*/	
-	if ((Raw_Data & 0x00800000) == 0x00800000)	//负数
-	{
-		Raw_Data = Raw_Data - 1;					
-		Raw_Data = ~Raw_Data;							
-		Raw_Data = Raw_Data & 0x80FFFFFF;	
-		Raw_Data = ~Raw_Data;							
-		Raw_Data = Raw_Data + 1;					
-		Raw_Data = Raw_Data | 0x80000000;	
-	}
-	for(i = 0; i < 3; i++)
-	{
-		CalibAD_TEMP[i] = CalibAD[i];
-		if ((CalibAD_TEMP[i] & 0x00800000) == 0x00800000)	//负数
-		{
-			CalibAD_TEMP[i] = CalibAD_TEMP[i] - 1;					
-			CalibAD_TEMP[i] = ~CalibAD_TEMP[i];							
-			CalibAD_TEMP[i] = CalibAD_TEMP[i] & 0x80FFFFFF;	
-			CalibAD_TEMP[i] = ~CalibAD_TEMP[i];							
-			CalibAD_TEMP[i] = CalibAD_TEMP[i] + 1;					
-			CalibAD_TEMP[i] = CalibAD_TEMP[i] | 0x80000000;	
-		}		
-	}
-	
-	/*----------线性拟合----------*/
-//	if (Raw_Data <= CalibAD_TEMP[1])
+//void Sensor_Task(void)
+//{
+//	float Temp, Filter_Temp;
+//	u8 i;
+//    int	CalibAD_TEMP[Calib_Num];	
+//	int Raw_Data = Get_Bridge_RawData();
+//	
+//	/*----------处理负数----------*/	
+//	if ((Raw_Data & 0x00800000) == 0x00800000)	//负数
 //	{
-//		k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
-//		t = Extreme_Value[1] - k * CalibAD_TEMP[1];		
+//		Raw_Data = Raw_Data - 1;					
+//		Raw_Data = ~Raw_Data;							
+//		Raw_Data = Raw_Data & 0x80FFFFFF;	
+//		Raw_Data = ~Raw_Data;							
+//		Raw_Data = Raw_Data + 1;					
+//		Raw_Data = Raw_Data | 0x80000000;	
 //	}
-//	else 
+//	for(i = 0; i < 3; i++)
 //	{
-//		k = (float)(Extreme_Value[2] - Extreme_Value[1]) / (CalibAD_TEMP[2] - CalibAD_TEMP[1]);
-//		t = Extreme_Value[2] - k * CalibAD_TEMP[2];			
+//		CalibAD_TEMP[i] = CalibAD[i];
+//		if ((CalibAD_TEMP[i] & 0x00800000) == 0x00800000)	//负数
+//		{
+//			CalibAD_TEMP[i] = CalibAD_TEMP[i] - 1;					
+//			CalibAD_TEMP[i] = ~CalibAD_TEMP[i];							
+//			CalibAD_TEMP[i] = CalibAD_TEMP[i] & 0x80FFFFFF;	
+//			CalibAD_TEMP[i] = ~CalibAD_TEMP[i];							
+//			CalibAD_TEMP[i] = CalibAD_TEMP[i] + 1;					
+//			CalibAD_TEMP[i] = CalibAD_TEMP[i] | 0x80000000;	
+//		}		
 //	}
-	
-	if(CalibAD_TEMP[0] < CalibAD_TEMP[2])
-	{
-		if (Raw_Data <= CalibAD_TEMP[1])
-		{
-			k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
-			t = Extreme_Value[1] - k * CalibAD_TEMP[1];		
-		}
-		else 
-		{
-			k = (float)(Extreme_Value[2] - Extreme_Value[1]) / (CalibAD_TEMP[2] - CalibAD_TEMP[1]);
-			t = Extreme_Value[2] - k * CalibAD_TEMP[2];			
-		}
-	}
-	else
-	{
-		if (Raw_Data <= CalibAD_TEMP[1])
-		{
-			k = (float)(Extreme_Value[2] - Extreme_Value[1]) / (CalibAD_TEMP[2] - CalibAD_TEMP[1]);
-			t = Extreme_Value[2] - k * CalibAD_TEMP[2];	
-		}
-		else 
-		{
-			k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
-			t = Extreme_Value[1] - k * CalibAD_TEMP[1];	
-		}
-	}
-	
-	Temp = k * Raw_Data + t;	
+//	
+//	/*----------线性拟合----------*/
+////	if (Raw_Data <= CalibAD_TEMP[1])
+////	{
+////		k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
+////		t = Extreme_Value[1] - k * CalibAD_TEMP[1];		
+////	}
+////	else 
+////	{
+////		k = (float)(Extreme_Value[2] - Extreme_Value[1]) / (CalibAD_TEMP[2] - CalibAD_TEMP[1]);
+////		t = Extreme_Value[2] - k * CalibAD_TEMP[2];			
+////	}
+//	
+//	if(CalibAD_TEMP[0] < CalibAD_TEMP[2])
+//	{
+//		if (Raw_Data <= CalibAD_TEMP[1])
+//		{
+//			k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
+//			t = Extreme_Value[1] - k * CalibAD_TEMP[1];		
+//		}
+//		else 
+//		{
+//			k = (float)(Extreme_Value[2] - Extreme_Value[1]) / (CalibAD_TEMP[2] - CalibAD_TEMP[1]);
+//			t = Extreme_Value[2] - k * CalibAD_TEMP[2];			
+//		}
+//	}
+//	else
+//	{
+//		if (Raw_Data <= CalibAD_TEMP[1])
+//		{
+//			k = (float)(Extreme_Value[2] - Extreme_Value[1]) / (CalibAD_TEMP[2] - CalibAD_TEMP[1]);
+//			t = Extreme_Value[2] - k * CalibAD_TEMP[2];	
+//		}
+//		else 
+//		{
+//			k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
+//			t = Extreme_Value[1] - k * CalibAD_TEMP[1];	
+//		}
+//	}
+//	
+//	Temp = k * Raw_Data + t;	
 
-	/*----------滤波----------*/
-	if (Init == 0)
-	{
-		Init = 1;
-		Filter_Temp = Filter(0, Temp, 0); 		
-	}
-	else Filter_Temp = Filter(0, Temp, FILTER_COUNT);	
-	
-	/*----------单位----------*/
-	switch(Para[0])
-	{
-		//kPa
-		case 0:
-			Value = Filter_Temp;
-		break;
-		//MPa
-		case 1:
-			Value = Filter_Temp / 1000.0;
-		break;
-		//Pa
-		case 2:
-			Value = Filter_Temp * 1000;
-		break;
-		//Bar
-		case 3:
-			Value = Filter_Temp / 100.0;
-		break;
-		//mBar
-		case 4:
-			Value = Filter_Temp * 10;
-		break;
-		//kg/cm2
-		case 5:
-			Value = Filter_Temp * 0.010197;
-		break;
-		//psi
-		case 6:
-			Value = Filter_Temp * 0.145038;
-		break;
-		//mH2O
-		case 7:
-			Value = Filter_Temp * 0.101972;
-		break;
-		//mmH2O
-		case 8:
-			Value = Filter_Temp * 101.9716;
-		break;
-		//kPa
-		default: 
-			Value = Filter_Temp;
-			Set_Para(0, 0);
-		break;
-	}
-	
-//	if (Para[0] == 0)				Value = Filter_Temp; 											//kPa
-//	else if (Para[0] == 1)	Value = Filter_Temp / 1000.0;							//MPa	
-//	else if (Para[0] == 2)	Value = Filter_Temp * 1000;								//Pa		
-//	else if (Para[0] == 3)	Value = Filter_Temp / 100.0;							//Bar		
-//	else if (Para[0] == 4)	Value = Filter_Temp * 10;									//mBar	
-//	else if (Para[0] == 5)	Value = Filter_Temp * 0.010197;						//kg/cm2	
-//	else if (Para[0] == 6)	Value = Filter_Temp * 0.145038;						//psi	
-//	else if (Para[0] == 7)	Value = Filter_Temp * 0.101972;						//mH2O	
-//	else if (Para[0] == 8)	Value = Filter_Temp * 101.9716;						//mmH2O	
-//	else
+//	/*----------滤波----------*/
+//	if (Init == 0)
 //	{
-//		Value = Filter_Temp; 											//kPa
-//		Set_Para(0, 0);
+//		Init = 1;
+//		Filter_Temp = Filter(0, Temp, 0); 		
 //	}
-	
-	/*----------小数点----------*/
-	switch(Para[1])
-	{
-		//
-		case 0:
-			INT_Value = (int)(Value);
-		break;
-		//
-		case 1:
-			INT_Value = (int)(Value * 10);
-		break;
-		//
-		case 2:
-			INT_Value = (int)(Value * 100);
-		break;
-		//
-		case 3:
-			INT_Value = (int)(Value * 1000);
-		break;
-		//
-		default: 
-			Value = (int)(Value * 10);									//1位小数点
-			Set_Para(1, 1);
-		break;
-	}
-	
-//	if (Para[1] == 0)		INT_Value = (int)(Value);
-//	else if (Para[1] == 1)	INT_Value = (int)(Value * 10);
-//	else if (Para[1] == 2)	INT_Value = (int)(Value * 100);	
-//	else if (Para[1] == 3)	INT_Value = (int)(Value * 1000);	
-//	else
+//	else Filter_Temp = Filter(0, Temp, FILTER_COUNT);	
+//	
+//	/*----------单位----------*/
+//	switch(Para[0])
 //	{
-//		Value = (int)(Value * 10);									//1位小数点
-//		Set_Para(1, 1);
-//	}	
+//		//kPa
+//		case 0:
+//			Value = Filter_Temp;
+//		break;
+//		//MPa
+//		case 1:
+//			Value = Filter_Temp / 1000.0;
+//		break;
+//		//Pa
+//		case 2:
+//			Value = Filter_Temp * 1000;
+//		break;
+//		//Bar
+//		case 3:
+//			Value = Filter_Temp / 100.0;
+//		break;
+//		//mBar
+//		case 4:
+//			Value = Filter_Temp * 10;
+//		break;
+//		//kg/cm2
+//		case 5:
+//			Value = Filter_Temp * 0.010197;
+//		break;
+//		//psi
+//		case 6:
+//			Value = Filter_Temp * 0.145038;
+//		break;
+//		//mH2O
+//		case 7:
+//			Value = Filter_Temp * 0.101972;
+//		break;
+//		//mmH2O
+//		case 8:
+//			Value = Filter_Temp * 101.9716;
+//		break;
+//		//kPa
+//		default: 
+//			Value = Filter_Temp;
+//			Set_Para(0, 0);
+//		break;
+//	}
+//	
+////	if (Para[0] == 0)				Value = Filter_Temp; 											//kPa
+////	else if (Para[0] == 1)	Value = Filter_Temp / 1000.0;							//MPa	
+////	else if (Para[0] == 2)	Value = Filter_Temp * 1000;								//Pa		
+////	else if (Para[0] == 3)	Value = Filter_Temp / 100.0;							//Bar		
+////	else if (Para[0] == 4)	Value = Filter_Temp * 10;									//mBar	
+////	else if (Para[0] == 5)	Value = Filter_Temp * 0.010197;						//kg/cm2	
+////	else if (Para[0] == 6)	Value = Filter_Temp * 0.145038;						//psi	
+////	else if (Para[0] == 7)	Value = Filter_Temp * 0.101972;						//mH2O	
+////	else if (Para[0] == 8)	Value = Filter_Temp * 101.9716;						//mmH2O	
+////	else
+////	{
+////		Value = Filter_Temp; 											//kPa
+////		Set_Para(0, 0);
+////	}
+//	
+//	/*----------小数点----------*/
+//	switch(Para[1])
+//	{
+//		//
+//		case 0:
+//			INT_Value = (int)(Value);
+//		break;
+//		//
+//		case 1:
+//			INT_Value = (int)(Value * 10);
+//		break;
+//		//
+//		case 2:
+//			INT_Value = (int)(Value * 100);
+//		break;
+//		//
+//		case 3:
+//			INT_Value = (int)(Value * 1000);
+//		break;
+//		//
+//		default: 
+//			Value = (int)(Value * 10);									//1位小数点
+//			Set_Para(1, 1);
+//		break;
+//	}
+//	
+////	if (Para[1] == 0)		INT_Value = (int)(Value);
+////	else if (Para[1] == 1)	INT_Value = (int)(Value * 10);
+////	else if (Para[1] == 2)	INT_Value = (int)(Value * 100);	
+////	else if (Para[1] == 3)	INT_Value = (int)(Value * 1000);	
+////	else
+////	{
+////		Value = (int)(Value * 10);									//1位小数点
+////		Set_Para(1, 1);
+////	}	
+//}
+
+void Sensor_Task(void) 
+{ 
+    float Temp, Filter_Temp; 
+    u8 i; 
+    	 
+    int Raw_Data = Get_Bridge_RawData();
+	int CalibNum =  Get_CalibDotNum(); 
+	int CalibAD_TEMP[15] = {0}; 
+	uint8_t found_interval = 0;
+    if ((Raw_Data & 0x00800000) == 0x00800000) 	 //??
+    { 
+        Raw_Data = Raw_Data - 1; 	 
+        Raw_Data = ~Raw_Data; 	 
+        Raw_Data = Raw_Data & 0x80FFFFFF; 	 
+        Raw_Data = ~Raw_Data; 	 
+        Raw_Data = Raw_Data + 1; 	 
+        Raw_Data = Raw_Data | 0x80000000; 	 
+    } 
+	
+    for(i = 0; i < CalibNum; i++) 
+    { 
+        CalibAD_TEMP[i] = CalibAD[i]; 		
+        if ((CalibAD_TEMP[i] & 0x00800000) == 0x00800000) 	 //??
+        { 
+            CalibAD_TEMP[i] = CalibAD_TEMP[i] - 1; 	 
+            CalibAD_TEMP[i] = ~CalibAD_TEMP[i]; 	 
+            CalibAD_TEMP[i] = CalibAD_TEMP[i] & 0x80FFFFFF; 	 
+            CalibAD_TEMP[i] = ~CalibAD_TEMP[i]; 	 
+            CalibAD_TEMP[i] = CalibAD_TEMP[i] + 1; 	 
+            CalibAD_TEMP[i] = CalibAD_TEMP[i] | 0x80000000; 	 
+        } 	 
+    } 
+
+
+
+	if (CalibNum >= 3) 
+	{
+		int start, end, step;
+		if (CalibAD_TEMP[0] < CalibAD_TEMP[CalibNum - 1]) // 
+		{
+			start = 1; 
+			end = CalibNum;   
+			step = 1;  
+		} 
+		else // 
+		{
+			start = CalibNum - 1; 
+			end = 0;     
+			step = -1;   
+		}
+
+		for (int i = start; step > 0 ? i < end : i > end; i += step) 
+		{ 
+			if(step > 0) // 
+			{
+				if (Raw_Data <= CalibAD_TEMP[i] && Raw_Data > CalibAD_TEMP[i - 1]) 
+				{
+					k = (float)(Extreme_Value[i] - Extreme_Value[i - 1]) / (CalibAD_TEMP[i] - CalibAD_TEMP[i - 1]);
+					t = Extreme_Value[i] - k * CalibAD_TEMP[i];
+					found_interval = 1;
+					break; 
+				}
+			}
+			if(step < 0) // 
+			{
+				if (Raw_Data > CalibAD_TEMP[i] && Raw_Data <= CalibAD_TEMP[i - 1]) 
+				{
+					k = (float)(Extreme_Value[i] - Extreme_Value[i - 1]) / (CalibAD_TEMP[i] - CalibAD_TEMP[i - 1]);
+					t = Extreme_Value[i] - k * CalibAD_TEMP[i];
+					found_interval = 1;
+					break; 
+				}
+			}
+		}
+
+		
+		if (!found_interval)
+		{
+			if (step > 0) 
+			{ 
+				if (Raw_Data <= CalibAD_TEMP[0]) 
+				{ 
+					k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]);
+					t = Extreme_Value[0] - k * CalibAD_TEMP[0]; 
+				} 
+				else if (Raw_Data > CalibAD_TEMP[CalibNum - 1]) 
+				{ 
+					k = (float)(Extreme_Value[CalibNum - 1] - Extreme_Value[CalibNum - 2]) / (CalibAD_TEMP[CalibNum - 1] - CalibAD_TEMP[CalibNum - 2]);
+					t = Extreme_Value[CalibNum - 1] - k * CalibAD_TEMP[CalibNum - 1];
+				}
+			}
+			else 
+			{ 
+				if (Raw_Data > CalibAD_TEMP[0]) 
+				{ 
+					k = (float)(Extreme_Value[1] - Extreme_Value[0]) / (CalibAD_TEMP[1] - CalibAD_TEMP[0]); 
+					t = Extreme_Value[0] - k * CalibAD_TEMP[0];
+				}
+				else if (Raw_Data <= CalibAD_TEMP[CalibNum - 1])
+				{ 
+					k = (float)(Extreme_Value[CalibNum - 1] - Extreme_Value[CalibNum - 2]) / (CalibAD_TEMP[CalibNum - 1] - CalibAD_TEMP[CalibNum - 2]);
+					t = Extreme_Value[CalibNum - 1] - k * CalibAD_TEMP[CalibNum - 1];
+				}
+			}
+		}
+	}
+
+	Temp = k * Raw_Data + t; 
+
+    if (Init == 0) 
+    { 
+        Init = 1; 
+        Filter_Temp = Filter(0, Temp, 0); 	 
+    } 
+    else Filter_Temp = Filter(0, Temp, FILTER_COUNT); 	 
+	 
+    switch(Para[0]) 
+    { 
+        //kPa 
+        case 0: 
+            Value = Filter_Temp; 
+        break; 
+        //MPa 
+        case 1: 
+            Value = Filter_Temp / 1000.0; 
+        break; 
+        //Pa 
+        case 2: 
+            Value = Filter_Temp * 1000; 
+        break; 
+        //Bar 
+        case 3: 
+            Value = Filter_Temp / 100.0; 
+        break; 
+        //mBar 
+        case 4: 
+            Value = Filter_Temp * 10; 
+        break; 
+        //kg/cm2 
+        case 5: 
+            Value = Filter_Temp * 0.010197; 
+        break; 
+        //psi 
+        case 6: 
+            Value = Filter_Temp * 0.145038; 
+        break; 
+        //mH2O 
+        case 7: 
+            Value = Filter_Temp * 0.101972; 
+        break; 
+        //mmH2O 
+        case 8: 
+            Value = Filter_Temp * 101.9716; 
+        break; 
+        //kPa 
+        default: 
+            Value = Filter_Temp; 
+            Set_Para(0, 0); 
+        break; 
+    } 
+	 
+    switch(Para[1]) 
+    { 
+        case 0: 
+            INT_Value = (int)(Value); 
+        break; 
+        case 1: 
+            INT_Value = (int)(Value * 10); 
+        break; 
+        case 2: 
+            INT_Value = (int)(Value * 100); 
+        break; 
+        case 3: 
+            INT_Value = (int)(Value * 1000); 
+        break; 
+        default: 
+            Value = (int)(Value * 10); 	 //1????
+            Set_Para(1, 1); 
+        break; 
+    } 
 }
 
 static float Filter(u8 No, float Value, u16 Coff)	//滤波
@@ -263,6 +447,27 @@ void Set_Extreme_Value(u8 i, float v)
 	Extreme_Value[i] = v;
 	Set_Calib_WriteFlag(1);
 }
+
+u16 Get_CalibDotNum(void)
+{
+	return CalibDotNum;
+}
+
+void Set_CalibDotNum(u16 v)
+{
+//	if ((v >= 3) && (v <= 9))
+//	{
+//		CalibDotNum = v;
+//		Set_Calib_WriteFlag(1);
+//	}
+	
+	if (v < 3) CalibDotNum = 3;
+	else if(v > 15) CalibDotNum = 15;
+	else CalibDotNum = v;
+	
+	Set_Calib_WriteFlag(1);
+}
+
 
 u16 Get_Para(u8 i)
 {
