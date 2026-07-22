@@ -13,7 +13,7 @@
 #include "APP_ParamInput.h"
 #include "APP_Sensor.h"
 
-#define SoftwareVer	"V1.5.1"	//软件版本
+#define SoftwareVer	"V1.6.0"	//软件版本
 #define HardwareVer	"V1.1.0"	//硬件版本
 
 #define MenuItemHanziFontSize (24)	//菜单条目汉字字体大小
@@ -24,6 +24,7 @@
 
 extern TypeParam_Config Param_Config;
 extern uint32_t RangeSet_Flag;
+extern uint32_t RangeNumber;
 
 uint8_t Long_Press_OnceCount = 0;
 
@@ -95,7 +96,7 @@ struct MenuItem SystemSetMenu[7];		//系统设置(语言设置，背光设置，输出测试，电流
 struct MenuItem ParamSetOut1[8];		//通道1参数设置(模式，阈值，峰值，谷值，迟滞值，响应时间，输出方式，退出)
 struct MenuItem ParamSetOut2[8];		//通道2参数设置
 struct MenuItem ParamSetUnit[3];		//显示单位设置(Mpa,Kpa,退出)
-struct MenuItem ParamSetRange[12];		//量程设置(36个量程,退出)---by zengxing20260306
+struct MenuItem ParamSetRange[14];		//量程设置(36个量程,退出)---by zengxing20260306
 //参数设置菜单下通道1参数设置
 struct MenuItem ParamSetOut1Mode[4];	//模式设置(简易模式，迟滞模式，窗口模式，退出)
 struct MenuItem ParamSetOut1Way[3];		//输出方式设置(正向输出，反向输出，退出)
@@ -132,7 +133,10 @@ void ParamSetRange7Funtion(void *param);		//量程7
 void ParamSetRange8Funtion(void *param);		//量程8
 void ParamSetRange9Funtion(void *param);		//量程9
 void ParamSetRange10Funtion(void *param);		//量程10
-void ParamSetRange10Funtion(void *param);		//量程11
+void ParamSetRange11Funtion(void *param);		//量程11
+void ParamSetRange12Funtion(void *param);		//量程12
+void ParamSetRange13Funtion(void *param);		//量程13
+
 /*******通道1参数设置菜单目录执行功能函数*******/
 void ParamSetOut1ModeFuntion(void *param);				//模式
 void ParamSetOut1ThresholdValueFuntion(void *param);	//阈值
@@ -394,7 +398,7 @@ struct MenuItem ParamSetRange[] =
 {
 	//-100Kpa~100
 	{
-		12,
+		14,
 		1,
 		ParamSetRange1Funtion,
 		NULL,
@@ -404,7 +408,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//0~250Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange2Funtion,
 		NULL,
@@ -414,7 +418,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//0~-100Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange3Funtion,
 		NULL,
@@ -424,7 +428,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//0~1Mpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange4Funtion,
 		NULL,
@@ -434,7 +438,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//0~100Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange5Funtion,
 		NULL,
@@ -444,7 +448,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//-100Kpa~1Mpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange6Funtion,
 		NULL,
@@ -454,7 +458,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//0~-101Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange7Funtion,
 		NULL,
@@ -464,7 +468,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//-50~500Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange8Funtion,
 		NULL,
@@ -474,7 +478,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//0~500Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange9Funtion,
 		NULL,
@@ -484,7 +488,7 @@ struct MenuItem ParamSetRange[] =
 	},
 	//101~-101Kpa
 	{
-		12,
+		14,
 		1,
 		ParamSetRange10Funtion,
 		NULL,
@@ -494,17 +498,37 @@ struct MenuItem ParamSetRange[] =
 	},
 	//10~-10Kpa
 	{
-		12,
+		14,
 		1,
-		ParamSetRange10Funtion,
+		ParamSetRange11Funtion,
 		NULL,
 		ParamSetMenu,
 		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-10~10K",{0,0,0,0,0,0,0,0}},
 		 {28,16,0,(uint8_t *)"-10~10Kpa",{0,0,0,0,0,0,0,0}}}
 	},
+	//1~-1Kpa
+	{
+		14,
+		1,
+		ParamSetRange12Funtion,
+		NULL,
+		ParamSetMenu,
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-1~1K",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-1~1Kpa",{0,0,0,0,0,0,0,0}}}
+	},
+	//0.5~-0.5Kpa
+	{
+		14,
+		1,
+		ParamSetRange13Funtion,
+		NULL,
+		ParamSetMenu,
+		{{40,24,MenuItemHanziFontSize,(uint8_t *)"-0.5~0.5K",{0,0,0,0,0,0,0,0}},
+		 {28,16,0,(uint8_t *)"-0.5~0.5Kpa",{0,0,0,0,0,0,0,0}}}
+	},
 //退出(Exit)
 	{
-		11,
+		14,
 		1,
 		QuitMenuFuntion,
 		NULL,
@@ -1526,6 +1550,9 @@ void ParamSetRange1Funtion(void *param)
 		AppDataWrite(1, APP_SetRangeFlag);
 		APPDataFlashWrite();
 		
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
+		
 		AppSetRange();			
 		sAutoReturnLastMenu = 1;
 	}
@@ -1552,6 +1579,9 @@ void ParamSetRange2Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
+		APPDataFlashWrite();
+		
+		AppDataWrite(1, APP_ParamVal2);
 		APPDataFlashWrite();
 		
 		AppSetRange();		
@@ -1582,6 +1612,9 @@ void ParamSetRange3Funtion(void *param)
 		AppDataWrite(1, APP_SetRangeFlag);
 		APPDataFlashWrite();
 		
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
+		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
@@ -1607,6 +1640,9 @@ void ParamSetRange4Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
+		APPDataFlashWrite();
+		
+		AppDataWrite(1, APP_ParamVal2);
 		APPDataFlashWrite();
 		
 		AppSetRange();
@@ -1636,6 +1672,9 @@ void ParamSetRange5Funtion(void *param)
 		AppDataWrite(1, APP_SetRangeFlag);
 		APPDataFlashWrite();	
 		
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
+		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
@@ -1661,7 +1700,10 @@ void ParamSetRange6Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
-		APPDataFlashWrite();	
+		APPDataFlashWrite();
+
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();		
 		
 		AppSetRange();	
 		sAutoReturnLastMenu = 1;
@@ -1688,7 +1730,10 @@ void ParamSetRange7Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
-		APPDataFlashWrite();		
+		APPDataFlashWrite();
+
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
 		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
@@ -1715,7 +1760,10 @@ void ParamSetRange8Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
-		APPDataFlashWrite();	
+		APPDataFlashWrite();
+
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
 		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
@@ -1744,6 +1792,9 @@ void ParamSetRange9Funtion(void *param)
 		AppDataWrite(1, APP_SetRangeFlag);
 		APPDataFlashWrite();
 		
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
+		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
 		
@@ -1769,7 +1820,10 @@ void ParamSetRange10Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
-		APPDataFlashWrite();	
+		APPDataFlashWrite();
+
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
 		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
@@ -1795,7 +1849,67 @@ void ParamSetRange11Funtion(void *param)
 		APPDataFlashWrite();
 		
 		AppDataWrite(1, APP_SetRangeFlag);
+		APPDataFlashWrite();
+
+		AppDataWrite(1, APP_ParamVal2);
+		APPDataFlashWrite();
+		
+		AppSetRange();
+		sAutoReturnLastMenu = 1;
+	}
+}
+//量程设置range12
+void ParamSetRange12Funtion(void *param)
+{
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
+	{
+		sMenuFlag &= ~0x60;
+		ParamSetEndDisplayPage(1,1);
+		MeterInterfaceKeyShield(FunctionKey_Disbale);
+		
+		sFunctionExecute = 1;
+		_gTaskShareDatObj.State |= 0x80;
+		_gTaskShareDatObj.TaskTick = GetSystemTick();
+	}
+	if((_gTaskShareDatObj.State & 0x80) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
+	{
+		AppDataWrite(11, APP_SystemRange);
+		APPDataFlashWrite();
+		
+		AppDataWrite(1, APP_SetRangeFlag);
 		APPDataFlashWrite();	
+		
+		AppDataWrite(3, APP_ParamVal2);
+		APPDataFlashWrite();
+		
+		AppSetRange();
+		sAutoReturnLastMenu = 1;
+	}
+}
+
+//量程设置range13
+void ParamSetRange13Funtion(void *param)
+{
+	if((_gTaskShareDatObj.State & 0x80) == 0x00 && (AppDataRead(APP_SetRangeFlag) == 0))
+	{
+		sMenuFlag &= ~0x60;
+		ParamSetEndDisplayPage(1,1);
+		MeterInterfaceKeyShield(FunctionKey_Disbale);
+		
+		sFunctionExecute = 1;
+		_gTaskShareDatObj.State |= 0x80;
+		_gTaskShareDatObj.TaskTick = GetSystemTick();
+	}
+	if((_gTaskShareDatObj.State & 0x80) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
+	{
+		AppDataWrite(12, APP_SystemRange);
+		APPDataFlashWrite();
+		
+		AppDataWrite(1, APP_SetRangeFlag);
+		APPDataFlashWrite();	
+		
+		AppDataWrite(3, APP_ParamVal2);
+		APPDataFlashWrite();
 		
 		AppSetRange();
 		sAutoReturnLastMenu = 1;
@@ -1814,13 +1928,21 @@ void ParamSetOut2Funtion(void *param)
 //单位设置
 void ParamSetUnitFuntion(void *param)
 {
-	MenuCatalogMessagePrint((struct MenuItem *)param);
+//	MenuCatalogMessagePrint((struct MenuItem *)param);
+//	
+//	switch(AppDataRead(APP_SystemUnit))
+//	{
+//		case SystemUnit_Mpa: vManualItemNum = 0; break;
+//		case SystemUnit_Kpa: vManualItemNum = 1; break;
+//		default: vManualItemNum = 0; break;
+//	}
+	vManualItemNum = AppDataRead(APP_SystemUnit);
 	
-	switch(AppDataRead(APP_SystemUnit))
+	if(RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
 	{
-		case SystemUnit_Mpa: vManualItemNum = 0; break;
-		case SystemUnit_Kpa: vManualItemNum = 1; break;
-		default: vManualItemNum = 0; break;
+		MeterInterfaceKeyShield(FunctionKey_Disbale);		
+		sFunctionExecute = 0;
+		MenuItemDisMax = 1;
 	}
 }	
 //零点校准
@@ -2511,13 +2633,17 @@ if(Param_Config.ProductClass == LowPressureSeriesProduct)
 		_gTaskShareDatObj.ParamSetObj.FontColour = MenuInterfaceColObj.ParamSetFontCol;
 		_gTaskShareDatObj.ParamSetObj.BackColour = MenuInterfaceColObj.ParamSetBackCol;
 		_gTaskShareDatObj.ParamSetObj.DecimalDisplayEnable = 1;
-		_gTaskShareDatObj.ParamSetObj.StartPos_X = 49;
+		_gTaskShareDatObj.ParamSetObj.StartPos_X = 37;
 		_gTaskShareDatObj.ParamSetObj.StartPos_Y = 25;
 		_gTaskShareDatObj.ParamSetObj.FontSize = 24;
 		_gTaskShareDatObj.ParamSetObj.ParamValue = AppDataRead(APP_Out1LagVal);			
 		_gTaskShareDatObj.ParamSetObj.ParamHighLimit = Param_Config.LagValUpperLimit;
 		_gTaskShareDatObj.ParamSetObj.ParamLowLimit = Param_Config.LagValLowerLimit;
 		_gTaskShareDatObj.ParamSetObj.ParamLen = 1;
+		if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+		{
+			_gTaskShareDatObj.ParamSetObj.ParamLen = 2;
+		}
 		LCD_ShowString(97,25,(uint8_t *)"kPa",MenuInterfaceColObj.ParamSetFontCol,MenuInterfaceColObj.ParamSetFontCol,24,1);
 		ParamSetTaskStart(1);
 		ParamSetTaskCreate(&_gTaskShareDatObj.ParamSetObj);
@@ -2598,15 +2724,15 @@ if (Param_Config.ProductClass == HighPressureSeriesProduct)
 	if((_gTaskShareDatObj.State & 0x40) && (GetSystemTick() - _gTaskShareDatObj.TaskTick > FunctionSetParamDisTick))
 	{
 		ParamSetTaskDelete();
-if(Param_Config.ProductClass == LowPressureSeriesProduct)
-{
-	AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out1LagVal);
-}
+		if(Param_Config.ProductClass == LowPressureSeriesProduct)
+		{
+			AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out1LagVal);
+		}
 		
-if (Param_Config.ProductClass == HighPressureSeriesProduct)
-{
-	AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue * 10, APP_Out1LagVal);
-}
+		if (Param_Config.ProductClass == HighPressureSeriesProduct)
+		{
+			AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue * 10, APP_Out1LagVal);
+		}
 		
 //		AppDataWrite(_gTaskShareDatObj.ParamSetObj.ParamValue, APP_Out1LagVal);
 		APPDataFlashWrite();

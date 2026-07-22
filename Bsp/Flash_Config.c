@@ -88,6 +88,7 @@ void AppDataInit(void)
 	{
 		Flash_Read_DATA(FlashDataBuffer, APP_DATA_Memory_ADDR, 256);
 		RangeSet_Flag = AppDataTemp->RangeSetFlag;
+		RangeNumber = AppDataTemp->RangeNum;
 		
 		Param_Config.ZeroingExtraScopeVal = AppDataTemp->ZeroingExtraScopeVal;
 		Param_Config.ProductClass = AppDataTemp->ProductClass;
@@ -96,7 +97,7 @@ void AppDataInit(void)
 		Param_Config.PressureUpperLimit = AppDataTemp->OutPressureUpperLimit;
 		Param_Config.PressureLowerLimit = AppDataTemp->OutPressureLowerLimit;
 		Param_Config.LagValUpperLimit = AppDataTemp->OutLagValUpperLimit;
-		Param_Config.LagValLowerLimit =AppDataTemp->OutPressureLowerLimit;
+		Param_Config.LagValLowerLimit =AppDataTemp->OutLagValLowerLimit;
 		Param_Config.DelayTimeUpperLimit = AppDataTemp->OutDelayTimeUpperLimit;
 		Param_Config.DelayTimeLowerLimit = AppDataTemp->OutDelayTimeLowerLimit;
 		Param_Config.ZeroingValUpperLimit = AppDataTemp->OutZeroingValUpperLimit;
@@ -122,6 +123,10 @@ void AppDataInit(void)
 	//
 	Set_UART_PARA(0,AppDataRead(APP_DevID));
 	Set_UART_PARA(1,AppDataRead(APP_CommBaudRate));
+	//
+	Set_PressureCal(0, AppDataRead(APP_CurrentOutCalibrationVal_4MA));
+	Set_PressureCal(1, AppDataRead(APP_CurrentOutCalibrationVal_Temp1));
+	Set_PressureCal(2, AppDataRead(APP_CurrentOutCalibrationVal_20MA));
 	//
 	Set_CalibDotNum(AppDataRead(APP_CalibDotNumber));
 	Set_CalibAD(0, AppDataRead(APP_CalibADxVal1));
@@ -185,6 +190,7 @@ void AppSetRange(void)
 	System_ParameterReset();
 	APPDataFlashWrite();
 	Flash_Read_DATA(FlashDataBuffer, APP_DATA_Memory_ADDR, 256);
+	HAL_NVIC_SystemReset();
 }
 /****************************************
  *º¯ÊýÃû³Æ£º

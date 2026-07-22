@@ -198,15 +198,25 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 					{
 						TempVal_U16 = TempVal_S32;
 					}
-					TempVal_S32 = TempVal_U16/10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += TempVal_U8*6;
-					LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += 6;
-					TempVal_S32 = TempVal_U16%10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);	
+					if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+					{
+						TempVal_S32 = TempVal_U16/10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += TempVal_U8*6;
+						LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += 6;
+						TempVal_S32 = TempVal_U16%10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);	
+					}
+					if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+					{
+						TempVal_S32 = TempVal_U16;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%.3f", ((float)TempVal_S32)/1000);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					}						
+					
 				}
 				else
 				{
@@ -230,16 +240,27 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 					{
 						TempVal_U16 = TempVal_S32;
 					}
-					TempVal_S32 = TempVal_U16/10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += TempVal_U8*6;
-					LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += 6;
-					TempVal_S32 = TempVal_U16%10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += (TempVal_U8+1)*6;			
+					if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+					{
+						TempVal_S32 = TempVal_U16/10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += TempVal_U8*6;
+						LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += 6;
+						TempVal_S32 = TempVal_U16%10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += (TempVal_U8+1)*6;	
+					}
+					if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+					{
+						TempVal_S32 = TempVal_U16;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%.3f", ((float)TempVal_S32)/1000);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos = 88;
+					}						
+								
 					//谷值
 					LCD_ShowChinese(Pos,18,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,19);
 					Pos += 12;
@@ -258,15 +279,24 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 					{
 						TempVal_U16 = TempVal_S32;
 					}
-					TempVal_S32 = TempVal_U16/10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += TempVal_U8*6;
-					LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += 6;
-					TempVal_S32 = TempVal_U16%10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+					{
+						TempVal_S32 = TempVal_U16/10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += TempVal_U8*6;
+						LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += 6;
+						TempVal_S32 = TempVal_U16%10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					}
+					if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+					{
+						TempVal_S32 = TempVal_U16;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%.3f", ((float)TempVal_S32)/1000);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					}
 				}
 				//迟滞值
 				LCD_ShowChinese(22,34,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,4);
@@ -274,11 +304,21 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 				LCD_ShowChinese(46,34,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,13);
 				LCD_ShowChar(58,34,':',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
 				TempVal_S32 = AppDataRead(APP_Out1LagVal);
-				TempVal_U16 = TempVal_S32;
-				LCD_ShowIntNum(64,34,TempVal_U16/10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-				LCD_ShowChar(70,34,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,1);
-				LCD_ShowIntNum(76,34,TempVal_U16%10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-				LCD_ShowString(82,34,(uint8_t *)"kPa",_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+				if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+				{
+					TempVal_U16 = TempVal_S32;
+					LCD_ShowIntNum(64,34,TempVal_U16/10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					LCD_ShowChar(70,34,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,1);
+					LCD_ShowIntNum(76,34,TempVal_U16%10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					LCD_ShowString(82,34,(uint8_t *)"kPa",_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+				}
+				if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+				{
+					TempVal_U16 = TempVal_S32;
+					TempVal_U8 = snprintf(buf, sizeof(buf), "%.2f", ((float)TempVal_S32)/100);
+					LCD_ShowString(64,34,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					LCD_ShowString(94,34,(uint8_t *)"kPa",_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+				}
 				//响应时间
 				LCD_ShowChinese(22,50,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,14);
 				LCD_ShowChinese(34,50,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,15);
@@ -357,15 +397,24 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 					{
 						TempVal_U16 = TempVal_S32;
 					}
-					TempVal_S32 = TempVal_U16/10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += TempVal_U8*6;
-					LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += 6;
-					TempVal_S32 = TempVal_U16%10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);	
+					if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+					{
+						TempVal_S32 = TempVal_U16/10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += TempVal_U8*6;
+						LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += 6;
+						TempVal_S32 = TempVal_U16%10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);	
+					}
+					if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+					{
+						TempVal_S32 = TempVal_U16;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%.3f", ((float)TempVal_S32)/1000);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					}
 				}
 				else
 				{
@@ -389,16 +438,26 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 					{
 						TempVal_U16 = TempVal_S32;
 					}
-					TempVal_S32 = TempVal_U16/10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += TempVal_U8*6;
-					LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += 6;
-					TempVal_S32 = TempVal_U16%10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += (TempVal_U8+1)*6;			
+					if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+					{
+						TempVal_S32 = TempVal_U16/10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += TempVal_U8*6;
+						LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += 6;
+						TempVal_S32 = TempVal_U16%10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += (TempVal_U8+1)*6;	
+					}
+					if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+					{
+						TempVal_S32 = TempVal_U16;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%.3f", ((float)TempVal_S32)/1000);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos = 88;
+					}			
 					//谷值
 					LCD_ShowChinese(Pos,18,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,19);
 					Pos += 12;
@@ -417,15 +476,24 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 					{
 						TempVal_U16 = TempVal_S32;
 					}
-					TempVal_S32 = TempVal_U16/10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += TempVal_U8*6;
-					LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-					Pos += 6;
-					TempVal_S32 = TempVal_U16%10;
-					TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
-					LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+					{
+						TempVal_S32 = TempVal_U16/10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += TempVal_U8*6;
+						LCD_ShowChar(Pos,18,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+						Pos += 6;
+						TempVal_S32 = TempVal_U16%10;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%d", TempVal_S32);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					}
+					if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+					{
+						TempVal_S32 = TempVal_U16;
+						TempVal_U8 = snprintf(buf, sizeof(buf), "%.3f", ((float)TempVal_S32)/1000);
+						LCD_ShowString(Pos,18,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					}
 				}
 				//迟滞值
 				LCD_ShowChinese(22,34,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,4);
@@ -433,11 +501,21 @@ static void MainPageParamDisplayTask(uint8_t page_num)
 				LCD_ShowChinese(46,34,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,13);
 				LCD_ShowChar(58,34,':',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
 				TempVal_S32 = AppDataRead(APP_Out2LagVal);
-				TempVal_U16 = TempVal_S32;
-				LCD_ShowIntNum(64,34,TempVal_U16/10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-				LCD_ShowChar(70,34,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,1);
-				LCD_ShowIntNum(76,34,TempVal_U16%10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
-				LCD_ShowString(82,34,(uint8_t *)"kPa",_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+				if( RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
+				{
+					TempVal_U16 = TempVal_S32;
+					LCD_ShowIntNum(64,34,TempVal_U16/10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					LCD_ShowChar(70,34,'.',_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,1);
+					LCD_ShowIntNum(76,34,TempVal_U16%10,1,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					LCD_ShowString(82,34,(uint8_t *)"kPa",_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+				}
+				if( RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12)
+				{
+					TempVal_U16 = TempVal_S32;
+					TempVal_U8 = snprintf(buf, sizeof(buf), "%.2f", ((float)TempVal_S32)/100);
+					LCD_ShowString(64,34,(uint8_t *)buf,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+					LCD_ShowString(94,34,(uint8_t *)"kPa",_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0);
+				}	
 				//响应时间
 				LCD_ShowChinese(22,50,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,14);
 				LCD_ShowChinese(34,50,_gLCD_MainPageDat.vFontColour,_gLCD_MainPageDat.vBackColour,12,0,15);
@@ -978,8 +1056,23 @@ static void LCD_MainInterfaceTask(void *param)
 			LCD_DisTemp->sDisRefreshEnable = 0;
 		}            
 		
-		Len = My_NumberCount(LCD_DisTemp->vAirPressureVal);
-		My_IntegerSplit(LCD_DisTemp->vAirPressureVal, Len, DataBuff);
+		if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+		{
+			if(abs(LCD_DisTemp->vAirPressureVal) >= 1000)
+			{
+				Len = My_NumberCount(LCD_DisTemp->vAirPressureVal);	
+			}
+			if(abs(LCD_DisTemp->vAirPressureVal) < 1000)
+			{
+				Len = 4;	
+			}	
+			My_IntegerSplit(LCD_DisTemp->vAirPressureVal, Len, DataBuff);
+		}
+		if((RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12))
+		{
+			Len = My_NumberCount(LCD_DisTemp->vAirPressureVal);		
+			My_IntegerSplit(LCD_DisTemp->vAirPressureVal, Len, DataBuff);
+		}
 		//
 //		if(LCD_DisTemp->vAirPressureVal < 0)
 //		{
@@ -1033,39 +1126,91 @@ static void LCD_MainInterfaceTask(void *param)
 			{
 				//大于等于1Mpa
 				case 5:
-					PointPos = 131;
-					PosBuff[0] = 59; PosBuff[1] = 83; PosBuff[2] = 107; PosBuff[3] = 136;
-					DataBuff[0] = 9; DataBuff[1] = 9; DataBuff[2] = 9; DataBuff[3] = 9; DataBuff[4] = 0;
-					Len = 4;
+					if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+					{
+						PointPos = 83;
+						PosBuff[0] = 59; PosBuff[1] = 88; PosBuff[2] = 112; PosBuff[3] = 136;
+					}
+					else
+					{
+						PointPos = 131;
+						PosBuff[0] = 59; PosBuff[1] = 83; PosBuff[2] = 107; PosBuff[3] = 136;
+					}
 					DataFontCol = RED;
 				break;
 				
 				case 4:
-					PointPos = 131;
-					PosBuff[0] = 59; PosBuff[1] = 83; PosBuff[2] = 107; PosBuff[3] = 136;
+					if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+					{
+						PointPos = 83;
+						PosBuff[0] = 59; PosBuff[1] = 88; PosBuff[2] = 112; PosBuff[3] = 136;
+					}
+					else
+					{
+						PointPos = 131;
+						PosBuff[0] = 59; PosBuff[1] = 83; PosBuff[2] = 107; PosBuff[3] = 136;
+					}	
 					DataFontCol = LCD_DisTemp->vFontColour;
 				break;
 					
 				case 3:
-					PointPos = 131;
-					PosBuff[0] = 83; PosBuff[1] = 107; PosBuff[2] = 136; PosBuff[3] = 0;
+					if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+					{
+						PointPos = 83;
+						PosBuff[0] = 59; PosBuff[1] = 88; PosBuff[2] = 112; PosBuff[3] = 136;
+					}
+					else
+					{
+						PointPos = 131;
+						PosBuff[0] = 83; PosBuff[1] = 107; PosBuff[2] = 136; PosBuff[3] = 0;
+					}
 					DataFontCol = LCD_DisTemp->vFontColour;
 				break;
 				
 				case 2:
-					PointPos = 131;
-					PosBuff[0] = 107; PosBuff[1] = 136; PosBuff[2] = 0; PosBuff[3] = 0;
+					if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+					{
+						PointPos = 83;
+						PosBuff[0] = 59; PosBuff[1] = 88; PosBuff[2] = 112; PosBuff[3] = 136;
+					}
+					else
+					{
+						PointPos = 131;
+						PosBuff[0] = 107; PosBuff[1] = 136; PosBuff[2] = 0; PosBuff[3] = 0;
+					}
 					DataFontCol = LCD_DisTemp->vFontColour;
 				break;
 				
 				case 1:
-					PointPos = 131;
-					PosBuff[0] = 107; PosBuff[1] = 136; PosBuff[2] = 0; PosBuff[3] = 0;
-					Len = 2;
+					if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+					{
+						PointPos = 83;
+						PosBuff[0] = 59; PosBuff[1] = 88; PosBuff[2] = 112; PosBuff[3] = 136;
+					}
+					else
+					{
+						PointPos = 131;
+						PosBuff[0] = 107; PosBuff[1] = 136; PosBuff[2] = 0; PosBuff[3] = 0;
+						Len = 2;
+					}
 					DataBuff[1] = DataBuff[0];
 					DataBuff[0] = 0;
 					DataFontCol = LCD_DisTemp->vFontColour;
 				break;
+				default:
+					if((RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+					{
+						PointPos = 83;
+						PosBuff[0] = 59; PosBuff[1] = 88; PosBuff[2] = 112; PosBuff[3] = 136;
+					}
+					else
+					{
+						PointPos = 131;
+						PosBuff[0] = 59; PosBuff[1] = 83; PosBuff[2] = 107; PosBuff[3] = 136;
+					}
+					DataBuff[0] = 9; DataBuff[1] = 9; DataBuff[2] = 9; DataBuff[3] = 9; DataBuff[4] = 0;
+					Len = 4;
+					DataFontCol = RED;
 			}
 			//
 			MainPageRefreshScan(LCD_DisTemp, Len);
@@ -1230,7 +1375,7 @@ void System_ParameterReset(void)
 	}
 		if(RangeNumber == 1 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)5);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)10);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 1;
 			
@@ -1254,7 +1399,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 2 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)2);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)4);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 2;
 			
@@ -1280,7 +1425,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 3 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)20);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)60);
 			Param_Config.ProductClass = HighPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 1;
 			
@@ -1305,7 +1450,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 4 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)2);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)4);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 1;
 			
@@ -1330,7 +1475,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 5 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)22);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)66);
 			Param_Config.ProductClass = HighPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 0;
 			
@@ -1354,7 +1499,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 6 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)2);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)4);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 2;
 			
@@ -1379,7 +1524,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 7 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)11);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)33);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 0;
 			
@@ -1404,7 +1549,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 8 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)10);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)30);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 1;
 			
@@ -1429,7 +1574,7 @@ void System_ParameterReset(void)
 		}
 		if(RangeNumber == 9 )//
 		{
-			Param_Config.ZeroingExtraScopeVal = ((int32_t)4);
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)8);
 			Param_Config.ProductClass = LowPressureSeriesProduct;
 			Param_Config.AirPressureValueType = 0;
 			
@@ -1450,6 +1595,79 @@ void System_ParameterReset(void)
 			Param_Config.Default_Ch2_ThresholdVal = ((int32_t)200);
 			Param_Config.Default_Ch2_PeakValVal = ((int32_t)-200);
 			Param_Config.Default_Ch2_ValleyVal = ((int32_t)-600);
+		}
+		
+		if(RangeNumber == 10 )//
+		{
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)80);
+			Param_Config.ProductClass = LowPressureSeriesProduct;
+			Param_Config.AirPressureValueType = 0;
+			
+			Param_Config.PressureUpperLimit = ((int32_t)10000);
+			Param_Config.PressureLowerLimit = ((int32_t)-10000);
+			Param_Config.LagValUpperLimit = ((int32_t)100);
+			Param_Config.LagValLowerLimit =((int32_t)10);
+			Param_Config.DelayTimeUpperLimit = ((int32_t)5000);
+			Param_Config.DelayTimeLowerLimit = ((int32_t)2);
+			Param_Config.ZeroingValUpperLimit = ((int32_t)50);
+			Param_Config.ZeroingValLowerLimit = ((int32_t)-50);
+			Param_Config.ZeroingErrorRange = ((int32_t)40);
+			
+			Param_Config.Default_LagVal = ((int32_t)10);
+			Param_Config.Default_Ch1_ThresholdVal = ((int32_t)2000);
+			Param_Config.Default_Ch1_PeakValVal = ((int32_t)-2000);
+			Param_Config.Default_Ch1_ValleyVal = ((int32_t)-6000);
+			Param_Config.Default_Ch2_ThresholdVal = ((int32_t)2000);
+			Param_Config.Default_Ch2_PeakValVal = ((int32_t)-2000);
+			Param_Config.Default_Ch2_ValleyVal = ((int32_t)-6000);
+		}
+		if(RangeNumber == 11 )//
+		{
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)8);
+			Param_Config.ProductClass = LowPressureSeriesProduct;
+			Param_Config.AirPressureValueType = 0;
+			
+			Param_Config.PressureUpperLimit = ((int32_t)1000);
+			Param_Config.PressureLowerLimit = ((int32_t)-1000);
+			Param_Config.LagValUpperLimit = ((int32_t)10);
+			Param_Config.LagValLowerLimit =((int32_t)1);
+			Param_Config.DelayTimeUpperLimit = ((int32_t)5000);
+			Param_Config.DelayTimeLowerLimit = ((int32_t)2);
+			Param_Config.ZeroingValUpperLimit = ((int32_t)5);
+			Param_Config.ZeroingValLowerLimit = ((int32_t)-5);
+			Param_Config.ZeroingErrorRange = ((int32_t)4);
+			
+			Param_Config.Default_LagVal = ((int32_t)1);
+			Param_Config.Default_Ch1_ThresholdVal = ((int32_t)200);
+			Param_Config.Default_Ch1_PeakValVal = ((int32_t)-200);
+			Param_Config.Default_Ch1_ValleyVal = ((int32_t)-600);
+			Param_Config.Default_Ch2_ThresholdVal = ((int32_t)200);
+			Param_Config.Default_Ch2_PeakValVal = ((int32_t)-200);
+			Param_Config.Default_Ch2_ValleyVal = ((int32_t)-600);
+		}
+		if(RangeNumber == 12 )//
+		{
+			Param_Config.ZeroingExtraScopeVal = ((int32_t)4);
+			Param_Config.ProductClass = LowPressureSeriesProduct;
+			Param_Config.AirPressureValueType = 0;
+			
+			Param_Config.PressureUpperLimit = ((int32_t)500);
+			Param_Config.PressureLowerLimit = ((int32_t)-500);
+			Param_Config.LagValUpperLimit = ((int32_t)5);
+			Param_Config.LagValLowerLimit =((int32_t)1);
+			Param_Config.DelayTimeUpperLimit = ((int32_t)5000);
+			Param_Config.DelayTimeLowerLimit = ((int32_t)2);
+			Param_Config.ZeroingValUpperLimit = ((int32_t)2);
+			Param_Config.ZeroingValLowerLimit = ((int32_t)-2);
+			Param_Config.ZeroingErrorRange = ((int32_t)2);
+			
+			Param_Config.Default_LagVal = ((int32_t)1);
+			Param_Config.Default_Ch1_ThresholdVal = ((int32_t)100);
+			Param_Config.Default_Ch1_PeakValVal = ((int32_t)-100);
+			Param_Config.Default_Ch1_ValleyVal = ((int32_t)-300);
+			Param_Config.Default_Ch2_ThresholdVal = ((int32_t)100);
+			Param_Config.Default_Ch2_PeakValVal = ((int32_t)-100);
+			Param_Config.Default_Ch2_ValleyVal = ((int32_t)-300);
 		}
 	
 //	//清空用户数据
@@ -1473,6 +1691,12 @@ void System_ParameterReset(void)
 	//显示单位：Kpa
 	AppDataWrite((int32_t)SystemUnit_Kpa, APP_SystemUnit);
 	
+	//通道
+	AppDataWrite(Param_Config.ZeroingExtraScopeVal, APP_ZeroingExtraScopeVal);
+	//通道
+	AppDataWrite(Param_Config.ProductClass, APP_ProductClass);
+	//通道
+	AppDataWrite(Param_Config.AirPressureValueType, App_AirPressureValueType);	
 	
 	//通道
 	AppDataWrite(Param_Config.PressureUpperLimit, APP_OutPressureUpperLimit);

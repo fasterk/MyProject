@@ -322,7 +322,7 @@ void Sensor_Task(void)
         Filter_Temp = Filter(0, Temp, 0); 	 
     } 
     else Filter_Temp = Filter(0, Temp, FILTER_COUNT); 	 
-	 
+	 Filter_Temp = 0.567;
     switch(Para[0]) 
     { 
         //kPa 

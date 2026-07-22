@@ -8,7 +8,7 @@
 #define ParamSetTaskDataMax (8)
 
 static volatile int32_t vParamSetTaskNumber = -1;		//参数设置任务编号
-
+extern uint32_t RangeNumber;
 //压力输入模式
 static volatile uint8_t vPressureIntputSta = 0;			//压力输入控制标志位
 static uint16_t vPressureIntputUnitPos[2] = {0,0};
@@ -237,7 +237,7 @@ static void ParamSetInterfaceTask(void *param)
 			Temp_U32 = ParamObj->ParamValue;
 		}
 		//检测是否压力输入模式
-		if(vPressureIntputSta & 0x80)
+		if(vPressureIntputSta & 0x80 && RangeNumber != 10 && RangeNumber != 11 && RangeNumber != 12)
 		{
 			if(Temp_U32 > 9999)	//MPa
 			{
@@ -258,6 +258,38 @@ static void ParamSetInterfaceTask(void *param)
 				if(vPressureIntputSta & 0x40)
 				{
 					ParamObj->ParamLen = 1;
+//					vParamSetChangeVal[0] = 1;
+//					vParamSetChangeVal[1] = 10;
+//					vParamSetTaskOldNumberCount = 0;
+//					LCD_Fill(ParamObj->StartPos_X,ParamObj->StartPos_Y,(ParamObj->FontColour>>1)*6 + ParamObj->StartPos_X,ParamObj->StartPos_Y+ParamObj->FontSize,ParamObj->BackColour);
+					LCD_ShowString(vPressureIntputUnitPos[0],vPressureIntputUnitPos[1],(uint8_t *)"kPa",ParamObj->FontColour,ParamObj->BackColour,ParamObj->FontSize,0);
+					vPressureIntputSta &= ~0x40;
+				}
+			}
+		}
+		
+		//??????????
+		if(vPressureIntputSta & 0x80 && (RangeNumber == 10 || RangeNumber == 11 || RangeNumber == 12))
+		{
+			if(Temp_U32 > 9999)	//MPa
+			{
+				Temp_U32 /= 10;
+				if((vPressureIntputSta & 0x40) == 0x00)
+				{
+					ParamObj->ParamLen = 2;
+//					vParamSetChangeVal[0] = 10;
+//					vParamSetChangeVal[1] = 100;
+//					vParamSetTaskOldNumberCount = 0;
+//					LCD_Fill(ParamObj->StartPos_X,ParamObj->StartPos_Y,(ParamObj->FontColour>>1)*6 + ParamObj->StartPos_X,ParamObj->StartPos_Y+ParamObj->FontSize,ParamObj->BackColour);
+					LCD_ShowString(vPressureIntputUnitPos[0],vPressureIntputUnitPos[1],(uint8_t *)"kPa",ParamObj->FontColour,ParamObj->BackColour,ParamObj->FontSize,0);
+					vPressureIntputSta |= 0x40;
+				}
+			}
+			else	//KPa
+			{
+				if(vPressureIntputSta & 0x40)
+				{
+					ParamObj->ParamLen = 3;
 //					vParamSetChangeVal[0] = 1;
 //					vParamSetChangeVal[1] = 10;
 //					vParamSetTaskOldNumberCount = 0;
